@@ -16,8 +16,10 @@ from covid19dh import covid19
 def get_data_from_ktx(save_local=True):
     # 데이터 로딩
     df_demand1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(201501-202305).xlsx'), skiprows=5)
+    df_demand1 = df_demand1[df_demand1['운행년월'] != '2023년 05월']
     df_demand2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(202305-202403).xlsx'), skiprows=5)
     df_info1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)시종착역별 열차운행(201501-202305).xlsx'), skiprows=8)
+    df_info1 = df_info1[df_info1['운행일자'].apply(lambda x: x[:9] != '2023년 05월')]
     df_info2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)시종착역별 열차운행(202305-202403).xlsx'), skiprows=8)
     df_demand = pd.concat([df_demand1, df_demand2], axis=0)
     df_info = pd.concat([df_info1, df_info2], axis=0)
