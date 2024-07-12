@@ -13,14 +13,16 @@ from covid19dh import covid19
 
 
 
-def get_data_from_ktx(save_local=True):
+def get_data_from_ktx():
     # 데이터 로딩
     df_demand1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(201501-202305).xlsx'), skiprows=5)
-    df_demand1 = df_demand1[df_demand1['운행년월'] != '2023년 05월']
     df_demand2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(202305-202403).xlsx'), skiprows=5)
+    duplicate = list(set(df_demand1['운행년월']).intersection(set(df_demand2['운행년월'])))[0]
+    df_demand1 = df_demand1[df_demand1['운행년월'] != duplicate]
     df_info1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)시종착역별 열차운행(201501-202305).xlsx'), skiprows=8)
-    df_info1 = df_info1[df_info1['운행일자'].apply(lambda x: x[:9] != '2023년 05월')]
     df_info2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)시종착역별 열차운행(202305-202403).xlsx'), skiprows=8)
+    duplicate = list(set(df_info1['운행일자'].apply(lambda x:x[:9])).intersection(set(df_info2['운행일자'].apply(lambda x:x[:9]))))[0]
+    df_info1 = df_info1[df_info1['운행일자'].apply(lambda x: x[:9] != duplicate)]
     df_demand = pd.concat([df_demand1, df_demand2], axis=0)
     df_info = pd.concat([df_info1, df_info2], axis=0)
                 
@@ -127,6 +129,11 @@ def get_data_from_ktx(save_local=True):
     Y_related_max = np.max([feature_Yrelated.count(x) for x in set(feature_Yrelated)])
     feature_Yrelated = [x for x in set(feature_Yrelated) if feature_Yrelated.count(x) == Y_related_max]
     df_covid = pd.concat([time_covid.reset_index().iloc[:,1:], df_covid[feature_Yrelated]], axis=1)
+    ## 변수명변경
+    df_covid.rename(columns={'stringency_index':'코로나진행정도', 'government_response_index':'정부대응정도',
+                             'international_movement_restrictions':'국가이동제한정도', 'deaths':'사망자수',
+                             'people_vaccinated':'접종시작자수', 'people_fully_vaccinated':'접종완료자수', 
+                             'containment_health_index':'격리된자수','confirmed':'확진자수'}, inplace=True)
     ## 결합
     df_demand = pd.merge(df_demand, df_covid, left_on='운행일자', right_on='date', how='left')
     
@@ -160,17 +167,36 @@ def get_data_from_ktx(save_local=True):
     df_info = pd.concat([time_info, df_info], axis=1)
     df_demand = df_demand[['주운행선', '운행일자'] + [col for col in df_demand.columns if col not in ['주운행선', '운행일자']]]
     df_info = df_info[['주운행선', '운행일자'] + [col for col in df_info.columns if col not in ['주운행선', '운행일자']]]
-    df = df[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
+    df_month = df[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
     
     # 저장
-    if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
-        if not os.path.exists(folder_location):
-            os.makedirs(folder_location)
-        save_name = os.path.join(folder_location, 'df_KTX_KK.csv')
-        df.to_csv(save_name, encoding='utf-8-sig')
+    folder_location = os.path.join(os.getcwd(), 'Data', '')
+    if not os.path.exists(folder_location):
+        os.makedirs(folder_location)
+    save_name = os.path.join(folder_location, 'df_KTX_month_KK.csv')
+    df_month.to_csv(save_name, encoding='utf-8-sig')
+    
+    # 일평균변환
+    df_day = []
+    for each in df_month.values:
+        if each[0] == '전체':
+            each_day = np.append(each[:8], (each[8:] / each[3]))
+        elif each[0] == '주말':
+            each_day = np.append(each[:8], (each[8:] / each[4]))
+        elif each[0] == '주중':
+            each_day = np.append(each[:8], (each[8:] / each[5]))
+        df_day.append(each_day)
+    df_day = pd.DataFrame(df_day)
+    df_day.columns = df_month.columns
+    
+    # 저장
+    folder_location = os.path.join(os.getcwd(), 'Data', '')
+    if not os.path.exists(folder_location):
+        os.makedirs(folder_location)
+    save_name = os.path.join(folder_location, 'df_KTX_day_KK.csv')
+    df_day.to_csv(save_name, encoding='utf-8-sig')    
 
-    return df
+    return df_month, df_day
 
 
 def feature_lagging(df, colname, direction='downward', lag_length=1):
