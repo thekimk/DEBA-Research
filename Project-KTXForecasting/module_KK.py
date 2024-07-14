@@ -223,11 +223,16 @@ def feature_lagging(df, colname, direction='downward', lag_length=1):
     return df, colname_lag
 
 
-def preprocessing_ktx(df_raw, Y_colname, 
+def preprocessing_ktx(df_raw, Y_colname, X_delete=None,
                       lag_length=None, lag_direction='downward',
                       date_splits=None):
+    # 변수삭제
+    if X_delete != None:
+        df = df_raw[[col for col in df_raw.columns if col not in X_delete]]
+    else:
+        df = df_raw.copy()
+    
     # 시간인덱스
-    df = df_raw.copy()
     df['운행년월'] = pd.to_datetime(df['운행년월'])
     df = df.set_index('운행년월')
     
@@ -246,5 +251,9 @@ def preprocessing_ktx(df_raw, Y_colname,
         df_train = df[df.index <= date_splits[0]]
         df_validate = df[(df.index > date_splits[0]) & (df.index <= date_splits[1])]
         df_test = df[(df.index > date_splits[1])]
+    
+    # X변수명 정리
+    X_col_FUTR = list(df_test.columns[df_test.sum() != 0])
+    X_col_HISTR = [col for col in df_train.columns if col not in [Y_colname]+X_col_FUTR]
         
-    return df_train, df_validate, df_test
+    return df_train, df_validate, df_test, X_col_FUTR, X_col_HISTR
