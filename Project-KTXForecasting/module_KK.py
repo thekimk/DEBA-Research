@@ -251,9 +251,5 @@ def preprocessing_ktx(df_raw, Y_colname, X_delete=None,
         df_train = df[df.index <= date_splits[0]]
         df_validate = df[(df.index > date_splits[0]) & (df.index <= date_splits[1])]
         df_test = df[(df.index > date_splits[1])]
-    
-    # X변수명 정리
-    X_col_FUTR = list(df_test.columns[df_test.sum() != 0])
-    X_col_HISTR = [col for col in df_train.columns if col not in [Y_colname]+X_col_FUTR]
         
-    return df_train, df_validate, df_test, X_col_FUTR, X_col_HISTR
+    return df_train, df_validate, df_test, list(df_train.columns)
