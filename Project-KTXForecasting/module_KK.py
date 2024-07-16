@@ -13,7 +13,7 @@ from covid19dh import covid19
 
 
 
-def get_data_from_ktx():
+def get_data_from_ktx(date_max='2025-12-31'):
     # 데이터 로딩
     df_demand1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(201501-202305).xlsx'), skiprows=5)
     df_demand2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(202305-202403).xlsx'), skiprows=5)
@@ -42,9 +42,12 @@ def get_data_from_ktx():
     
     # 일별 집계 및 변수생성
     df_demand = df_demand.groupby(['주운행선', '운행일자']).sum().reset_index()
-    df_demand['1인당수입율'] = df_demand['승차수입금액']/df_demand['승차인원수']
-    df_demand['공급대비승차율'] = df_demand['승차인원수']/df_demand['공급좌석합계수']
-    df_demand['운행대비고객이동'] = df_demand['좌석거리']/df_demand['승차연인거리']
+    df_demand['1인당단가'] = df_demand['승차수입금액']/df_demand['승차인원수']
+    df_demand['1인당거리'] = df_demand['승차연인거리']/df_demand['승차인원수']
+    df_demand['1좌석당단가'] = df_demand['승차수입금액']/df_demand['공급좌석합계수']
+    df_demand['좌석회전율'] = df_demand['승차인원수']/df_demand['공급좌석합계수']
+    df_demand['1키로당단가'] = df_demand['승차수입금액']/df_demand['승차연인거리']
+    df_demand['승차율'] = df_demand['승차연인거리']/df_demand['좌석거리']
     df_info['시발종착역'] = df_info['시발역']+df_info['종착역']
     df_info = pd.concat([df_info.groupby(['주운행선', '운행일자'])['열차속성'].value_counts().unstack().reset_index(),
                          df_info.groupby(['주운행선', '운행일자'])['열차구분'].value_counts().unstack().reset_index().iloc[:,-3:],
@@ -52,62 +55,50 @@ def get_data_from_ktx():
                          df_info.groupby(['주운행선', '운행일자'])['종착역'].nunique().reset_index().iloc[:,-1],
                          df_info.groupby(['주운행선', '운행일자'])['시발종착역'].nunique().reset_index().iloc[:,-1],
                          df_info.groupby(['주운행선', '운행일자'])[['공급좌석수', '열차운행횟수']].sum().reset_index().iloc[:,-2:]], axis=1)
-    
+    df_concat = pd.merge(df_demand, df_info, how='inner', on=['주운행선', '운행일자'])
+    df_concat['1열차당승차인원'] = df_concat['승차인원수']/df_concat['열차운행횟수']
+    del df_concat['공급좌석수']
+
     # 예측기간 확장
     ## 시간변수 정의
-    df_demand['운행일자'] = pd.to_datetime(df_demand['운행일자'], format='%Y년 %m월 %d일')
-    df_info['운행일자'] = pd.to_datetime(df_info['운행일자'], format='%Y년 %m월 %d일')
+    df_concat['운행일자'] = pd.to_datetime(df_concat['운행일자'], format='%Y년 %m월 %d일')
     ## 예측 시계열 생성
-    df_time = pd.DataFrame(pd.date_range(df_demand['운행일자'].min(), '2025-12-31', freq='D'))
+    df_time = pd.DataFrame(pd.date_range(df_concat['운행일자'].min(), date_max, freq='D'))
     df_time.columns = ['운행일자']
     ## left 데이터 준비   
-    df_temp = df_demand.groupby(['주운행선', '운행일자']).sum().reset_index()
-    df_demand = pd.DataFrame()
+    df_temp = df_concat.groupby(['주운행선', '운행일자']).sum().reset_index()
+    df_concat = pd.DataFrame()
     for line in df_temp['주운행선'].unique():
         df_sub = df_temp[df_temp['주운행선'] == line]
         ## 결합
-        df_demand_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
-        df_demand_temp['주운행선'].fillna(line, inplace=True)
-        df_demand = pd.concat([df_demand, df_demand_temp], axis=0)
-    ## left 데이터 준비   
-    df_temp = df_info.groupby(['주운행선', '운행일자']).sum().reset_index()
-    df_info = pd.DataFrame()
-    for line in df_temp['주운행선'].unique():
-        df_sub = df_temp[df_temp['주운행선'] == line]
-        ## 결합
-        df_info_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
-        df_info_temp['주운행선'].fillna(line, inplace=True)
-        df_info = pd.concat([df_info, df_info_temp], axis=0)
+        df_concat_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
+        df_concat_temp['주운행선'].fillna(line, inplace=True)
+        df_concat = pd.concat([df_concat, df_concat_temp], axis=0)
     
     # 시간변수 추출
     ## 월집계용 변수생성
-    df_demand['운행년월'] = pd.to_datetime(df_demand['운행일자'].apply(lambda x: str(x)[:7]))
-    df_info['운행년월'] = pd.to_datetime(df_info['운행일자'].apply(lambda x: str(x)[:7]))
+    df_concat['운행년월'] = pd.to_datetime(df_concat['운행일자'].apply(lambda x: str(x)[:7]))
     ## 요일 추출
-    df_demand['요일'] = df_demand['운행일자'].dt.weekday
-    df_info['요일'] = df_info['운행일자'].dt.weekday
+    df_concat['요일'] = df_concat['운행일자'].dt.weekday
     weekday_list = ['월', '화', '수', '목', '금', '토', '일']
-    df_demand['요일'] = df_demand.apply(lambda x: weekday_list[x['요일']], axis=1)
-    df_info['요일'] = df_info.apply(lambda x: weekday_list[x['요일']], axis=1)
+    df_concat['요일'] = df_concat.apply(lambda x: weekday_list[x['요일']], axis=1)
     ## 주말/주중 추출
-    df_demand['일수'] = 1
-    df_demand['전체주중주말'] = df_demand['요일'].apply(lambda x: '주말' if x in ['금', '토', '일'] else '주중')
-    df_info['전체주중주말'] = df_info['요일'].apply(lambda x: '주말' if x in ['금', '토', '일'] else '주중')
-    df_demand['주말수'] = df_demand['요일'].isin(['금', '토', '일'])*1
-    df_demand['주중수'] = df_demand['요일'].isin(['월', '화', '수', '목'])*1
-    del df_demand['요일']
-    del df_info['요일']
+    df_concat['일수'] = 1
+    df_concat['전체주중주말'] = df_concat['요일'].apply(lambda x: '주말' if x in ['금', '토', '일'] else '주중')
+    df_concat['주말수'] = df_concat['요일'].isin(['금', '토', '일'])*1
+    df_concat['주중수'] = df_concat['요일'].isin(['월', '화', '수', '목'])*1
+    del df_concat['요일']
     ## 공휴일 추출
-    df_demand['공휴일수'] = df_demand['운행일자'].apply(lambda x: is_holiday(str(x)[:10]))*1
+    df_concat['공휴일수'] = df_concat['운행일자'].apply(lambda x: is_holiday(str(x)[:10]))*1
     ## 명절 추출
     traditional_holidays = []
-    for year in df_demand['운행일자'].dt.year.unique():
+    for year in df_concat['운행일자'].dt.year.unique():
         for holiday, holiday_name in year_holidays(str(year)):
             if ('설날' in holiday_name) or ('추석' in holiday_name):
                 traditional_holidays.append(holiday)
     traditional_holidays = pd.to_datetime(traditional_holidays, format='%Y년 %m월 %d일')
 #     traditional_holidays = [t.strftime("%Y년 %m월 %d일") for t in traditional_holidays]
-    df_demand['명절수'] = df_demand['운행일자'].apply(lambda x: 1 if x in traditional_holidays else 0)
+    df_concat['명절수'] = df_concat['운행일자'].apply(lambda x: 1 if x in traditional_holidays else 0)
     
     # Covid 데이터 결합
     ## Covid 데이터 전처리
@@ -120,8 +111,8 @@ def get_data_from_ktx():
     df_covid.fillna(0, inplace=True)
     ## 종속변수와의 관련도 높은 변수 필터
     feature_Yrelated = []
-    df_Y = df_demand[df_demand['운행일자'].apply(lambda x: x in time_covid.values)]
-    for line in df_demand['주운행선'].unique():
+    df_Y = df_concat[df_concat['운행일자'].apply(lambda x: x in time_covid.values)]
+    for line in df_concat['주운행선'].unique():
         Y = df_Y[df_Y['주운행선'] == line]['승차인원수'].reset_index().iloc[:,1:]
         corr = abs(pd.concat([Y, df_covid], axis=1).corr().iloc[:,[0]]).dropna()
         corr = corr.sort_values(by='승차인원수', ascending=False)
@@ -134,69 +125,49 @@ def get_data_from_ktx():
                              'international_movement_restrictions':'국가이동제한정도', 'deaths':'사망자수',
                              'people_vaccinated':'접종시작자수', 'people_fully_vaccinated':'접종완료자수', 
                              'containment_health_index':'격리된자수','confirmed':'확진자수'}, inplace=True)
-    ## 결합
-    df_demand = pd.merge(df_demand, df_covid, left_on='운행일자', right_on='date', how='left')
-    
-    # 정리
-    time_demand, time_info = df_demand['운행일자'], df_info['운행일자']
-    del df_demand['date']
-    del df_demand['운행일자']
-    del df_info['운행일자']
-    
+    ## 정리
+    df_concat = pd.merge(df_concat, df_covid, left_on='운행일자', right_on='date', how='left')
+    del df_concat['date']
+      
     # 월별 집계
-    df_demand_month = df_demand.groupby(['주운행선', '운행년월']).sum()
-    df_demand_month = df_demand_month[[col for col in df_demand_month.columns if col != '전체주중주말']].reset_index()
-    df_demand_month['전체주중주말'] = '전체'
-    df_demand_temp = df_demand.groupby(['전체주중주말', '주운행선', '운행년월']).sum().reset_index()
-    df_demand_month = df_demand_month[df_demand_temp.columns]
-    df_info_month = df_info.groupby(['주운행선', '운행년월']).sum()
-    df_info_month = df_info_month[[col for col in df_info_month.columns if col != '전체주중주말']].reset_index()
-    df_info_month['전체주중주말'] = '전체'
-    df_info_temp = df_info.groupby(['전체주중주말', '주운행선', '운행년월']).sum().reset_index()
-    df_info_month = df_info_month[df_info_temp.columns]
-          
-    # 데이터 결합
-    df_demand_month = pd.concat([df_demand_month, df_demand_temp], axis=0)
-    df_info_month = pd.concat([df_info_month, df_info_temp], axis=0).fillna(0)
-    del df_info_month['공급좌석수']
-    df = pd.concat([df_demand_month.set_index(['전체주중주말','주운행선','운행년월']),
-                    df_info_month.set_index(['전체주중주말','주운행선','운행년월'])], axis=1).reset_index()
-    
-    # 정리
-    df_demand = pd.concat([time_demand, df_demand], axis=1)
-    df_info = pd.concat([time_info, df_info], axis=1)
-    df_demand = df_demand[['주운행선', '운행일자'] + [col for col in df_demand.columns if col not in ['주운행선', '운행일자']]]
-    df_info = df_info[['주운행선', '운행일자'] + [col for col in df_info.columns if col not in ['주운행선', '운행일자']]]
-    df_month = df[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
-    
-    # 저장
+    year_month_day = df_concat['운행일자']
+    del df_concat['운행일자']
+    df_monthsum = df_concat.groupby(['주운행선', '운행년월']).sum()
+    df_monthsum = df_monthsum[[col for col in df_monthsum.columns if col != '전체주중주말']].reset_index()
+    df_monthsum['전체주중주말'] = '전체'
+    df_temp = df_concat.groupby(['전체주중주말', '주운행선', '운행년월']).sum().reset_index()
+    df_monthsum = df_monthsum[df_temp.columns]
+    df_monthsum = pd.concat([df_monthsum, df_temp], axis=0).fillna(0)    
+    ## 정리
+    df_concat = pd.concat([year_month_day, df_concat], axis=1)
+    df_monthsum = df_monthsum[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df_monthsum.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
+    ## 저장
     folder_location = os.path.join(os.getcwd(), 'Data', '')
     if not os.path.exists(folder_location):
         os.makedirs(folder_location)
-    save_name = os.path.join(folder_location, 'df_KTX_month_KK.csv')
-    df_month.to_csv(save_name, encoding='utf-8-sig')
+    save_name = os.path.join(folder_location, 'df_KTX_monthsum_KK.csv')
+    df_monthsum.to_csv(save_name, encoding='utf-8-sig')
     
     # 일평균변환
-    df_day = []
-    for each in df_month.values:
+    df_monthmean = []
+    for each in df_monthsum.values:
         if each[0] == '전체':
             each_day = np.append(each[:8], (each[8:] / each[3]))
         elif each[0] == '주말':
             each_day = np.append(each[:8], (each[8:] / each[4]))
         elif each[0] == '주중':
             each_day = np.append(each[:8], (each[8:] / each[5]))
-        df_day.append(each_day)
-    df_day = pd.DataFrame(df_day)
-    df_day.columns = df_month.columns
-    
-    # 저장
+        df_monthmean.append(each_day)
+    df_monthmean = pd.DataFrame(df_monthmean)
+    df_monthmean.columns = df_monthsum.columns
+    ## 저장
     folder_location = os.path.join(os.getcwd(), 'Data', '')
     if not os.path.exists(folder_location):
         os.makedirs(folder_location)
-    save_name = os.path.join(folder_location, 'df_KTX_day_KK.csv')
-    df_day.to_csv(save_name, encoding='utf-8-sig')    
+    save_name = os.path.join(folder_location, 'df_KTX_monthmean_KK.csv')
+    df_monthmean.to_csv(save_name, encoding='utf-8-sig')    
 
-    return df_month, df_day
+    return df_monthsum, df_monthmean
 
 
 def feature_lagging(df, colname, direction='downward', lag_length=1):
