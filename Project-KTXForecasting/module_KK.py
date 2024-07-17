@@ -141,7 +141,24 @@ def get_data_from_ktx(date_max='2025-12-31'):
     ## 정리
     df_concat = pd.concat([year_month_day, df_concat], axis=1)
     df_monthsum = df_monthsum[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df_monthsum.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
-    ## 저장
+    
+    # 도메인지식 첨부
+    ## 공급좌석합계수 4월 첨부
+    ## 기존 24년 4월 데이터만 추출 하여 신규 24년 4월 데이터를 덮어씀
+    df_addition = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='공급좌석수4월추출', header=2).dropna()
+    df_addition['운행년월'] = pd.to_datetime(df_addition['운행년도']+' '+df_addition['운행월'] + ' 01일', format='%Y년 %m월 %d일')
+    del df_addition['운행년도']
+    del df_addition['운행월']
+    df_addition = df_addition[df_addition['운행년월'] >= '2024-04']
+    df_sum = df_addition.groupby(['운행년월', '주운행선']).sum().reset_index()
+    df_sum['주말구분'] = '전체'
+    df_addition = pd.concat([df_addition, df_sum], axis=0).sort_values(by=['주말구분', '주운행선'])
+    index_modify = df_monthsum[df_monthsum['운행년월'] == '2024-04-01']['공급좌석합계수'].index
+    new_values = df_addition.sort_values(by=['주말구분', '주운행선'])['합계 : 공급좌석수(총)'].values
+    for idx, new in zip(index_modify, new_values):
+        df_monthsum.loc[idx, '공급좌석합계수'] = new
+    
+    # 저장
     folder_location = os.path.join(os.getcwd(), 'Data', '')
     if not os.path.exists(folder_location):
         os.makedirs(folder_location)
