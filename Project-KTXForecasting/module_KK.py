@@ -57,7 +57,7 @@ def get_data_from_ktx(date_max='2025-12-31'):
                          df_info.groupby(['주운행선', '운행일자'])[['공급좌석수', '열차운행횟수']].sum().reset_index().iloc[:,-2:]], axis=1)
     df_concat = pd.merge(df_demand, df_info, how='inner', on=['주운행선', '운행일자'])
     df_concat['1열차당승차인원'] = df_concat['승차인원수']/df_concat['열차운행횟수']
-    del df_concat['공급좌석수']
+    df_concat = df_concat.drop(['공급좌석수', '승차수입금액', '승차연인거리', '좌석거리', '열차운행횟수'], axis = 1)
 
     # 예측기간 확장
     ## 시간변수 정의
@@ -147,8 +147,7 @@ def get_data_from_ktx(date_max='2025-12-31'):
     ## 기존 24년 4월 데이터만 추출 하여 24년 4월 ~ 25년 12월까지 데이터를 덮어씀
     df_addition = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='공급좌석수4월추출', header=2).dropna()
     df_addition['운행년월'] = pd.to_datetime(df_addition['운행년도']+' '+df_addition['운행월'] + ' 01일', format='%Y년 %m월 %d일')
-    del df_addition['운행년도']
-    del df_addition['운행월']
+    df_addition = df_addition.drop(['운행년도', '운행월'], axis = 1)
     df_addition = df_addition[df_addition['운행년월'] >= '2024-04']
     df_sum = df_addition.groupby(['운행년월', '주운행선']).sum().reset_index()
     df_sum['주말구분'] = '전체'
@@ -188,7 +187,7 @@ def get_data_from_ktx(date_max='2025-12-31'):
             df_subb = df_base[(df_base['전체주중주말'] == wom) & (df_base['주운행선'] == line)]
             df_monthsum.loc[df_subt.index, '승차율'] = df_subb['승차율'].values
     ## 일반노선 승차인원수
-    df_demand_normal = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행선_일반(DDPA037)(1501-1612).xlsx'))
+    df_demand_normal = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행선_일반(DDPA037)(1501-2404).xlsx'))
     del df_demand_normal['메트릭']
     ## 노선필터
     df_demand_normal = df_demand_normal[df_demand_normal['주운행선'].isin(['경부선', '경전선', '동해선', '전라선', '호남선'])].reset_index().iloc[:,1:]
@@ -199,8 +198,7 @@ def get_data_from_ktx(date_max='2025-12-31'):
     weekday_list = ['월', '화', '수', '목', '금', '토', '일']
     df_demand_normal['요일'] = df_demand_normal.apply(lambda x: weekday_list[x['요일']], axis=1)
     df_demand_normal['전체주중주말'] = df_demand_normal['요일'].apply(lambda x: '주말' if x in ['금', '토', '일'] else '주중')
-    del df_demand_normal['운행일자']
-    del df_demand_normal['요일']
+    df_demand_normal = df_demand_normal.drop(['운행일자', '요일'], axis = 1)
     df_demand_normal = df_demand_normal[['전체주중주말', '주운행선', '역무열차종', '운행년월', '승차인원수']]
     ## 전체주중주말 정리
     df_temp_all = df_demand_normal[['주운행선', '역무열차종', '운행년월', '승차인원수']].groupby(['주운행선', '역무열차종', '운행년월']).sum().reset_index()
