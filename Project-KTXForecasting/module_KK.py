@@ -127,8 +127,40 @@ def get_data_from_ktx(date_max='2025-12-31'):
                              'containment_health_index':'격리된자수','confirmed':'확진자수'}, inplace=True)
     ## 정리
     df_concat = pd.merge(df_concat, df_covid, left_on='운행일자', right_on='date', how='left').reset_index().iloc[:,1:]
+    df_concat = df_concat.sort_values(by=['주운행선', '운행일자'])
     del df_concat['date']
-      
+    
+    # 데이터 추가
+    # 24년 4~6월 승차인원수 추가
+    df_y4 = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='승차인원수4월추출', header=2).dropna()
+    df_y4['운행일자'] = pd.to_datetime(df_y4['운행년월일'], format='%Y년 %m월 %d일')
+    del df_y4['운행년월일']
+    df_y4 = df_y4[df_y4['운행일자'] >= '2024-04'].reset_index().iloc[:,1:]
+    df_y56 = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='승차인원수5월6월추출').dropna()
+    df_y56['운행일자'] = pd.to_datetime(df_y56['운행일자'], format='%Y년 %m월 %d일')
+    df_y56 = df_y56.set_index('운행일자').stack().reset_index()
+    df_y56.columns = ['운행일자', '주운행선', '합계 : 승차인원(합계)']
+    df_y = pd.concat([df_y4, df_y56], axis=0).reset_index().iloc[:,1:]
+    df_y.columns = ['주운행선', '승차인원수', '운행일자']
+    df_y = df_y.sort_values(by=['주운행선', '운행일자'])
+    ## 원본 데이터에 결합
+    df_sub = df_concat[(df_concat['운행일자'] >= df_y['운행일자'].min()) & (df_concat['운행일자'] <= df_y['운행일자'].max())]
+    df_y.index = df_sub.index
+    df_update = df_concat.combine_first(df_y)
+    df_concat = df_update[df_concat.columns]
+    # 24년 4월 공급좌석합계수 추가
+    df_supply4 = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='공급좌석수4월추출', header=2).dropna()
+    df_supply4['운행일자'] = pd.to_datetime(df_supply4['운행년월일'], format='%Y년 %m월 %d일')
+    del df_supply4['운행년월일']
+    df_supply4 = df_supply4[df_supply4['운행일자'] >= '2024-04'].reset_index().iloc[:,1:]
+    df_supply4.columns = ['주운행선', '공급좌석합계수', '운행일자']
+    df_supply4 = df_supply4.sort_values(by=['주운행선', '운행일자'])
+    ## 원본 데이터에 결합
+    df_sub = df_concat[(df_concat['운행일자'] >= df_supply4['운행일자'].min()) & (df_concat['운행일자'] <= df_supply4['운행일자'].max())]
+    df_supply4.index = df_sub.index
+    df_update = df_concat.combine_first(df_supply4)
+    df_concat = df_update[df_concat.columns]
+    
     # 월별 집계
     year_month_day = df_concat['운행일자']
     del df_concat['운행일자']
@@ -137,26 +169,31 @@ def get_data_from_ktx(date_max='2025-12-31'):
     df_monthsum['전체주중주말'] = '전체'
     df_temp = df_concat.groupby(['전체주중주말', '주운행선', '운행년월']).sum().reset_index()
     df_monthsum = df_monthsum[df_temp.columns]
-    df_monthsum = pd.concat([df_monthsum, df_temp], axis=0).reset_index().iloc[:,1:].fillna(0)    
+    df_monthsum = pd.concat([df_monthsum, df_temp], axis=0).reset_index().iloc[:,1:].fillna(0)
     ## 정리
     df_concat = pd.concat([year_month_day, df_concat], axis=1)
     df_monthsum = df_monthsum[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df_monthsum.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
-
+    
     # 도메인지식 첨부
     ## 공급좌석합계수
-    ## 기존 24년 4월 데이터만 추출 하여 24년 4월 ~ 25년 12월까지 데이터를 덮어씀
-    df_addition = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='공급좌석수4월추출', header=2).dropna()
-    df_addition['운행년월'] = pd.to_datetime(df_addition['운행년도']+' '+df_addition['운행월'] + ' 01일', format='%Y년 %m월 %d일')
-    df_addition = df_addition.drop(['운행년도', '운행월'], axis = 1)
-    df_addition = df_addition[df_addition['운행년월'] >= '2024-04']
-    df_sum = df_addition.groupby(['운행년월', '주운행선']).sum().reset_index()
-    df_sum['주말구분'] = '전체'
-    df_addition = pd.concat([df_addition, df_sum], axis=0).sort_values(by=['주말구분', '주운행선'])
+    ## 기존 24년 4월 데이터만 추출 하여 24년 5월 ~ 25년 12월까지 데이터를 덮어씀
     for wom in df_monthsum['전체주중주말'].unique():
         for line in df_monthsum['주운행선'].unique():
             df_sub = df_monthsum[(df_monthsum['전체주중주말'] == wom) & (df_monthsum['주운행선'] == line) & (df_monthsum['운행년월'] >= '2024-04-01')]
-            numsit = df_addition[(df_addition['주말구분'] == wom) & (df_addition['주운행선'] == line)]['합계 : 공급좌석수(총)'].values
-            df_monthsum.loc[df_sub.index, '공급좌석합계수'] = df_monthsum.loc[df_sub.index, '공급좌석합계수'] + numsit
+            numsit = df_sub[(df_sub['전체주중주말'] == wom) & (df_sub['주운행선'] == line)]['공급좌석합계수'].values[0]
+            ## 5월부터 경부선 주말 4120석 증가, 주중 1030석 증가 및 호남 주중 1030석 증가
+            if (line == '경부선') and (wom == '주말'):
+                numsit = numsit + 4120
+            elif (line == '경부선') and (wom == '주중'):
+                numsit = numsit + 1030
+            elif (line == '경부선') and (wom == '전체'):
+                numsit = numsit + 4120 + 1030
+            elif (line == '호남선') and (wom == '주중'):
+                numsit = numsit + 1030
+            elif (line == '호남선') and (wom == '전체'):
+                numsit = numsit + 1030
+            ## 덮어씀
+            df_monthsum.loc[df_sub.index[1:], '공급좌석합계수'] = df_monthsum.loc[df_sub.index[1:], '공급좌석합계수'] + numsit
     ## 승차율
     ## 23년 3월까지와 24년 3월까지의 승차율 증감 테이블 생성
     df_compare = df_monthsum[(df_monthsum['운행년월'] >= '2023-01-01') & (df_monthsum['운행년월'] <= '2024-03-01')]
@@ -187,8 +224,7 @@ def get_data_from_ktx(date_max='2025-12-31'):
             df_subb = df_base[(df_base['전체주중주말'] == wom) & (df_base['주운행선'] == line)]
             df_monthsum.loc[df_subt.index, '승차율'] = df_subb['승차율'].values
     ## 일반노선 승차인원수
-    df_demand_normal = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행선_일반(DDPA037)(1501-2404).xlsx'))
-    del df_demand_normal['메트릭']
+    df_demand_normal = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='승차인원수일반')
     ## 노선필터
     df_demand_normal = df_demand_normal[df_demand_normal['주운행선'].isin(['경부선', '경전선', '동해선', '전라선', '호남선'])].reset_index().iloc[:,1:]
     ## 시간정보추출
