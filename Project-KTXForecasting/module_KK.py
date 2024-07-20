@@ -346,3 +346,22 @@ def preprocessing_ktx(df_raw, Y_colname, X_delete=None,
         df_test = df[(df.index > date_splits[1])]
         
     return df_train, df_validate, df_test, list(df_train.columns)
+
+
+def evaluation_ktx(target_line, target_dow, Y_real, Y_pred, year_prediction, year_comparison):
+    # 실제와 예측평균 추출
+    Y_pred = Y_pred[Y_pred.index >= year_prediction[0]]
+    Y_pred = Y_pred[[col for col in Y_pred.columns[2:] if col.split('-')[-1].isalpha()]].mean(axis=0)
+    Y_temp = []
+    for year in year_comparison:
+        Y_temp.append(Y_real[(Y_real.index >= year) & (Y_real != 0)].mean())
+    # 통계량비교 정리
+    Y_eval = pd.DataFrame([sum([Y_temp, [pred], list((pred / np.array(Y_temp) - 1)*100)], []) for pred in Y_pred])
+    Y_eval.columns = [year_comparison[0], year_comparison[1], year_prediction[0], 
+                      '증감율('+str(year_comparison[0])+'-'+str(year_prediction[0])+')', 
+                      '증감율('+str(year_comparison[1])+'-'+str(year_prediction[0])+')']
+    Y_eval['주운행선'] = target_line
+    Y_eval['전체주중주말'] = target_dow
+    Y_eval = Y_eval.set_index(['주운행선', '전체주중주말'])
+    
+    return Y_eval
