@@ -362,6 +362,7 @@ def evaluation_ktx(target_line, target_dow, Y_real, Y_pred, year_prediction, yea
                       '증감율('+str(year_comparison[1])+'-'+str(year_prediction[0])+')']
     Y_eval['주운행선'] = target_line
     Y_eval['전체주중주말'] = target_dow
+    Y_eval['알고리즘순위'] = list(Y_pred.index)
     Y_eval = Y_eval.set_index(['주운행선', '전체주중주말'])
     
     return Y_eval
