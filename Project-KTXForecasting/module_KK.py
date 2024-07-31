@@ -357,9 +357,9 @@ def evaluation_ktx(target_line, target_dow, Y_real, Y_pred, year_prediction, yea
         Y_temp.append(Y_real[(Y_real.index >= year) & (Y_real != 0)].mean())
     # 통계량비교 정리
     Y_eval = pd.DataFrame([sum([Y_temp, [pred], list((pred / np.array(Y_temp) - 1)*100)], []) for pred in Y_pred])
-    Y_eval.columns = [year_comparison[0], year_comparison[1], year_prediction[0], 
-                      '증감율('+str(year_comparison[0])+'-'+str(year_prediction[0])+')', 
-                      '증감율('+str(year_comparison[1])+'-'+str(year_prediction[0])+')']
+    Y_eval.columns = [year_comparison[0]+'년', year_comparison[1]+'년', year_prediction[0]+'년', 
+                      '증감율%('+str(year_comparison[0])+'-'+str(year_prediction[0])+')', 
+                      '증감율%('+str(year_comparison[1])+'-'+str(year_prediction[0])+')']
     Y_eval['주운행선'] = target_line
     Y_eval['전체주중주말'] = target_dow
     Y_eval['알고리즘순위'] = list(Y_pred.index)
