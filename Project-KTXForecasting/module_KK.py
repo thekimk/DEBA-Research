@@ -57,7 +57,8 @@ def get_data_from_ktx(date_max='2025-12-31'):
                          df_info.groupby(['주운행선', '운행일자'])[['공급좌석수', '열차운행횟수']].sum().reset_index().iloc[:,-2:]], axis=1)
     df_concat = pd.merge(df_demand, df_info, how='inner', on=['주운행선', '운행일자'])
     df_concat['1열차당승차인원'] = df_concat['승차인원수']/df_concat['열차운행횟수']
-    df_concat = df_concat.drop(['공급좌석수', '승차수입금액', '승차연인거리', '좌석거리', '열차운행횟수'], axis = 1)
+#     df_concat = df_concat.drop(['공급좌석수', '승차수입금액', '승차연인거리', '좌석거리', '열차운행횟수'], axis = 1)
+    df_concat = df_concat.drop(['공급좌석수', '승차수입금액', '승차연인거리', '좌석거리'], axis = 1)
 
     # 예측기간 확장
     ## 시간변수 정의
@@ -74,31 +75,9 @@ def get_data_from_ktx(date_max='2025-12-31'):
         df_concat_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
         df_concat_temp['주운행선'].fillna(line, inplace=True)
         df_concat = pd.concat([df_concat, df_concat_temp], axis=0)
-    
-    # 시간변수 추출
-    ## 월집계용 변수생성
-    df_concat['운행년월'] = pd.to_datetime(df_concat['운행일자'].apply(lambda x: str(x)[:7]))
-    ## 요일 추출
-    df_concat['요일'] = df_concat['운행일자'].dt.weekday
-    weekday_list = ['월', '화', '수', '목', '금', '토', '일']
-    df_concat['요일'] = df_concat.apply(lambda x: weekday_list[x['요일']], axis=1)
-    ## 주말/주중 추출
-    df_concat['일수'] = 1
-    df_concat['전체주중주말'] = df_concat['요일'].apply(lambda x: '주말' if x in ['금', '토', '일'] else '주중')
-    df_concat['주말수'] = df_concat['요일'].isin(['금', '토', '일'])*1
-    df_concat['주중수'] = df_concat['요일'].isin(['월', '화', '수', '목'])*1
-    del df_concat['요일']
-    ## 공휴일 추출
-    df_concat['공휴일수'] = df_concat['운행일자'].apply(lambda x: is_holiday(str(x)[:10]))*1
-    ## 명절 추출
-    traditional_holidays = []
-    for year in df_concat['운행일자'].dt.year.unique():
-        for holiday, holiday_name in year_holidays(str(year)):
-            if ('설날' in holiday_name) or ('추석' in holiday_name):
-                traditional_holidays.append(holiday)
-    traditional_holidays = pd.to_datetime(traditional_holidays, format='%Y년 %m월 %d일')
-#     traditional_holidays = [t.strftime("%Y년 %m월 %d일") for t in traditional_holidays]
-    df_concat['명절수'] = df_concat['운행일자'].apply(lambda x: 1 if x in traditional_holidays else 0)
+
+    # 시간변수 추출  
+    df_concat = feature_timeinfo(df_concat, colname_time='운행일자', weekend_dow=['금', '토', '일'])
     
     # Covid 데이터 결합
     ## Covid 데이터 전처리
@@ -314,6 +293,44 @@ def feature_lagging(df, colname, direction='downward', lag_length=1):
     df = pd.concat([df, df_lag], axis=1)
     
     return df, colname_lag
+
+
+def feature_timeinfo(df, colname_time, weekend_dow=['토', '일']):
+    # 월집계용 변수생성
+    df_time = df.copy()
+    df_time['운행년월'] = pd.to_datetime(df_time[colname_time].apply(lambda x: str(x)[:7]))
+    
+    # 일수 반영
+    df_time['일수'] = 1
+    
+    # 요일 추출
+    df_time['요일'] = df_time[colname_time].dt.weekday
+    weekday_list = ['월', '화', '수', '목', '금', '토', '일']
+    df_time['요일'] = df_time.apply(lambda x: weekday_list[x['요일']], axis=1)
+    
+    # 공휴일 추출
+    df_time['공휴일수'] = df_time[colname_time].apply(lambda x: is_holiday(str(x)[:10]))*1
+    
+    # 명절 추출
+    traditional_holidays = []
+    for year in df_time[colname_time].dt.year.unique():
+        for holiday, holiday_name in year_holidays(str(year)):
+            if ('설날' in holiday_name) or ('추석' in holiday_name):
+                traditional_holidays.append(holiday)
+    traditional_holidays = pd.to_datetime(traditional_holidays, format='%Y년 %m월 %d일')
+#     traditional_holidays = [t.strftime("%Y년 %m월 %d일") for t in traditional_holidays]
+    df_time['명절수'] = df_time[colname_time].apply(lambda x: 1 if x in traditional_holidays else 0)
+    
+    # 주말/주중 추출
+    df_time['전체주중주말'] = df_time['요일'].apply(lambda x: '주말' if x in weekend_dow else '주중')
+    weekday_dow = [each for each in ['월', '화', '수', '목', '금', '토', '일'] if each not in weekend_dow]
+    df_time['주중수'] = df_time['요일'].isin(weekday_dow)*1
+    df_time['주말수'] = df_time['요일'].isin(weekend_dow)*1
+    df_time['주말수'] = df_time['주말수'] + np.array([1 if np.sum(each) == 2 else 0 for each in zip(df_time['주중수'], df_time['공휴일수'])])
+    df_time['주중수'] = df_time['주중수'] + np.array([-1 if np.sum(each) == 2 else 0 for each in zip(df_time['주중수'], df_time['공휴일수'])])
+    del df_time['요일']
+    
+    return df_time
 
 
 def preprocessing_ktx(df_raw, Y_colname, X_delete=None,
