@@ -77,7 +77,9 @@ def get_data_from_ktx(date_max='2025-12-31'):
         df_concat = pd.concat([df_concat, df_concat_temp], axis=0)
 
     # 시간변수 추출  
-    df_concat = feature_timeinfo(df_concat, colname_time='운행일자', weekend_dow=['금', '토', '일'])
+    df_concat = feature_timeinfo(df_concat, colname_time='운행일자', 
+                                 weekend_dow=['금', '토', '일'],
+                                 holiday_except=['근로자의날'])
     
     # Covid 데이터 결합
     ## Covid 데이터 전처리
@@ -139,6 +141,18 @@ def get_data_from_ktx(date_max='2025-12-31'):
     df_supply4.index = df_sub.index
     df_update = df_concat.combine_first(df_supply4)
     df_concat = df_update[df_concat.columns]
+    # 24년 4월 운행횟수 추가
+    df_freq4 = pd.read_excel(os.path.join('.', 'Data', 'df_KTX_addition.xlsx'), sheet_name='운행횟수4월추출', header=2).dropna()
+    df_freq4['운행일자'] = pd.to_datetime(df_freq4['운행년월일'], format='%Y년 %m월 %d일')
+    del df_freq4['운행년월일']
+    df_freq4 = df_freq4[df_freq4['운행일자'] >= '2024-04'].reset_index().iloc[:,1:]
+    df_freq4.columns = ['주운행선', '열차운행횟수', '운행일자']
+    df_freq4 = df_freq4.sort_values(by=['주운행선', '운행일자'])
+    ## 원본 데이터에 결합
+    df_sub = df_concat[(df_concat['운행일자'] >= df_freq4['운행일자'].min()) & (df_concat['운행일자'] <= df_freq4['운행일자'].max())]
+    df_freq4.index = df_sub.index
+    df_update = df_concat.combine_first(df_freq4)
+    df_concat = df_update[df_concat.columns]
     
     # 월별 집계
     year_month_day = df_concat['운행일자']
@@ -173,6 +187,14 @@ def get_data_from_ktx(date_max='2025-12-31'):
                 numsit = numsit + 1030
             ## 덮어씀
             df_monthsum.loc[df_sub.index[1:], '공급좌석합계수'] = df_monthsum.loc[df_sub.index[1:], '공급좌석합계수'] + numsit
+    ## 운행횟수
+    ## 기존 24년 4월 데이터만 추출 하여 24년 5월 ~ 25년 12월까지 데이터를 덮어씀
+    for wom in df_monthsum['전체주중주말'].unique():
+        for line in df_monthsum['주운행선'].unique():
+            df_sub = df_monthsum[(df_monthsum['전체주중주말'] == wom) & (df_monthsum['주운행선'] == line) & (df_monthsum['운행년월'] >= '2024-04-01')]
+            numsit = df_sub[(df_sub['전체주중주말'] == wom) & (df_sub['주운행선'] == line)]['열차운행횟수'].values[0]
+            ## 덮어씀
+            df_monthsum.loc[df_sub.index[1:], '열차운행횟수'] = df_monthsum.loc[df_sub.index[1:], '열차운행횟수'] + numsit
     ## 승차율
     ## 23년 3월까지와 24년 3월까지의 승차율 증감 테이블 생성
     df_compare = df_monthsum[(df_monthsum['운행년월'] >= '2023-01-01') & (df_monthsum['운행년월'] <= '2024-03-01')]
@@ -295,7 +317,7 @@ def feature_lagging(df, colname, direction='downward', lag_length=1):
     return df, colname_lag
 
 
-def feature_timeinfo(df, colname_time, weekend_dow=['토', '일']):
+def feature_timeinfo(df, colname_time, weekend_dow=['토', '일'], holiday_except=[]):
     # 월집계용 변수생성
     df_time = df.copy()
     df_time['운행년월'] = pd.to_datetime(df_time[colname_time].apply(lambda x: str(x)[:7]))
@@ -314,7 +336,8 @@ def feature_timeinfo(df, colname_time, weekend_dow=['토', '일']):
     # 명절 추출
     traditional_holidays = []
     for year in df_time[colname_time].dt.year.unique():
-        for holiday, holiday_name in year_holidays(str(year)):
+        holiday_list = [each for each in year_holidays(str(year)) if each[1].replace(' ', '') not in holiday_except]
+        for holiday, holiday_name in holiday_list:
             if ('설날' in holiday_name) or ('추석' in holiday_name):
                 traditional_holidays.append(holiday)
     traditional_holidays = pd.to_datetime(traditional_holidays, format='%Y년 %m월 %d일')
