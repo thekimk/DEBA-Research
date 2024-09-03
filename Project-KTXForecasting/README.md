@@ -15,12 +15,10 @@
 - **분석대상(Y):** `월별 일평균 승차인원수`
 - **활용변수(X):** `시간정보/주말갯수/주중갯수/공유일/경제환경/이벤트 등` 활용
 - **요약:**
-![이미지5](https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213)
+<img src="https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213" width="70%">
 
 - **활용 알고리즘 후보:**
-
-
-<img src="https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="70%">
+<img src="https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="50%">
 
 ---
 
