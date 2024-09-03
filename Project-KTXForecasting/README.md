@@ -15,7 +15,7 @@
 - **분석대상(Y):** `월별 일평균 승차인원수`
 - **활용변수(X):** `시간정보/주말갯수/주중갯수/공유일/경제환경/이벤트 등` 활용
 
-
+![image](https://drive.google.com/file/d/17fBKSSd9F1XHL2HuSTUNGMw7ETQzBHXI/view?usp=drive_link)
 
 ---
 
