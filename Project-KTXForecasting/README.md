@@ -19,7 +19,7 @@
 
 ---
 
-### 수요예측 예시
+### KTX 단기수요 예측
 
 - **모델링 검증:**
 ![이미지1](https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf)
