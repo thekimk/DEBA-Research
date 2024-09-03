@@ -20,7 +20,7 @@
 - **활용 알고리즘 후보:**
 
 
-<img src="[https://github.com/favicon.ico](https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21)" width="70">
+<img src="https://github.com/favicon.ico](https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="70">
 
 ---
 
