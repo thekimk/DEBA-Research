@@ -14,12 +14,15 @@
 - **분석노선:** `전체/주말/주중 경부선, 경전선, 동해선, 전라선, 호남선 15종`
 - **분석대상(Y):** `월별 일평균 승차인원수`
 - **활용변수(X):** `시간정보/주말갯수/주중갯수/공유일/경제환경/이벤트 등` 활용
-
+- **요약:**
 ![이미지5](https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213)
 
 ---
 
 ### 수요예측 예시
 
+- **모델링 검증:**
 ![이미지1](https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf)
+
+- **최적 성능 예측:**
 ![이미지2](https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a)
