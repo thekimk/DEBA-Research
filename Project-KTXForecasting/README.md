@@ -18,14 +18,14 @@
 <img src="https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213" width="70%">
 
 - **활용 알고리즘 후보:**
-<img src="https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="50%">
+<img src="https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="40%">
 
 ---
 
 ### KTX 단기수요 예측
 
 - **모델링 검증:**
-![이미지1](https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf)
+<img src="https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf" width="50%">
 
 - **최적 성능 예측:**
-![이미지2](https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a)
+<img src="https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a" width="50%">
