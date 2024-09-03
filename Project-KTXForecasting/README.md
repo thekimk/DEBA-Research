@@ -17,6 +17,9 @@
 - **요약:**
 ![이미지5](https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213)
 
+- **활용 알고리즘 후보:**
+![이미지6](https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21)
+
 ---
 
 ### KTX 단기수요 예측
