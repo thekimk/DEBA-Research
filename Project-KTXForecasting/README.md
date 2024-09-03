@@ -21,5 +21,5 @@
 
 ### 수요예측 예시
 
-
-
+![이미지1](https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf)
+![이미지2](https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a)
