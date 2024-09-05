@@ -12,6 +12,7 @@
 > - **Validation:** `Random 10%`
 > - **Test:** `Random 10%`
 - **분석대상(Y):** `월별 일평균 승차인원수`
+<img width="70%" alt="Y_Donation" src="https://github.com/user-attachments/assets/cd2757a1-591a-46c1-8ee1-660f132611f3">
 - **활용변수(X):** `Y 변수를 제외한 나머지 변수`
 - **활용 알고리즘 후보:**
 > - Machine Learning 5종: `Logistic Regression, Random Forest, XGBoost, LGBM, CatBoost`
