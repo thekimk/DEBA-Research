@@ -1,4 +1,4 @@
-## ✔️ `DEBA(Digital Economy & Business Analytics) 소그룹 2기 멤버 모집`
+## ✔️ `DEBA(Digital Economy & Business Analytics) 소그룹 멤버 모집`
 
 ### :office: 연구실 소개
 - 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
@@ -11,7 +11,8 @@
 저는 `핀테크`를 포함한 전반적인 `금융경제 산업 전반의 거래 시장과 온라인 광고 마케팅`을 주로 연구하지만,     
 여러분들 중에서 `데이터 주도 애널리스트 또는 싸이언티스트로 경쟁력을 갖추고 본인을 브랜딩하는데 관심`있는 학생들을 모집합니다.
 
-- **1기 최종멤버:** `손도언, 차명주, 장민재, 임보민`
+- **1기 멤버:** `손도언, 차명주, 장민재, 임보민`
+- **2기 멤버:** `박재흥, 유효정, 조은지, 강보현, 이현서`
 - **세부소개 및 올해 프로젝트 계획:** https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf
 - **학과혜택:** 소그룹 활동이 필요한 도서 구입이나 회의비 등의 `필요 경비를 100만원 내로 지원`하며,      
 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
