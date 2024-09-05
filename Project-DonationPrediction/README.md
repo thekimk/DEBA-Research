@@ -16,7 +16,7 @@
 
 ---
 
-### 참고자료
+### 📖참고자료
 - https://research.beautifulfund.org/16076/
 - https://research.beautifulfund.org/13797/
 
