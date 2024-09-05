@@ -6,45 +6,29 @@
 ---
 
 ### ❓기부자 특성분석 및 예측
-- **분석내용:** `예측, 성능, 설명력`
-- **중간보고:** `2024년 6월` 
-- **최종보고:** `2024년 12월`
+- **데이터:** `한국보건사회연구원 한국복지패널` (https://www.koweps.re.kr:442/data/data/list.do)
+- **데이터기간:** `2006년~2023년`
+> - **Training:** `Random 80%`
+> - **Validation:** `Random 10%`
+> - **Test:** `Random 10%`
+- **분석대상(Y):** `월별 일평균 승차인원수`
+- **활용변수(X):** `Y 변수를 제외한 나머지 변수`
+- **활용 알고리즘 후보:**
+> - Machine Learning 5종: Logistic Regression, Random Forest, XGBoost, LGBM, CatBoost
+> - Deep Learning 2종: Multi-Layer Perception (MLP), Convolutional Neural Network (CNN)
   
 ---
 
-### 데이터
+### 💡기부자 특성 및 예측
+
+- **모델링 검증:**
+
+- **개인 기부확률 예측:**
+
+- **전체 기부특성 분석:**
 
 ---
 
 ### 📖참고자료
 - https://research.beautifulfund.org/16076/
 - https://research.beautifulfund.org/13797/
-
-
-
----
-
-### ❓KTX 승차수요 단기예측 분석
-- **데이터:** 전체 6개 파일 중 `4개의 일별 데이터를 월별로 집계`한 것
-- **데이터기간:** `2015년1월~2024년3월`
-> - **Training:** `2015년1월~2023년3월`
-> - **Validation:** `2023년4월~2024년3월`
-> - **Test:** `2024년4월~2025년12월`
-- **분석노선:** `전체/주말/주중 경부선, 경전선, 동해선, 전라선, 호남선 15종`
-- **분석대상(Y):** `월별 일평균 승차인원수`
-- **활용변수(X):** `시간정보/주말갯수/주중갯수/공유일/경제환경/이벤트 등` 활용
-- **요약:**
-<img src="https://github.com/user-attachments/assets/8bc029b3-394c-4fd6-9796-b560b8c51213" width="70%">
-
-- **활용 알고리즘 후보:**
-<img src="https://github.com/user-attachments/assets/9b5063b4-8743-4bbb-b49a-2c4ae527ad21" width="40%">
-
----
-
-### 💡KTX 단기수요 예측
-
-- **모델링 검증:**
-<img src="https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf" width="70%">
-
-- **최적 성능 예측:**
-<img src="https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a" width="70%">
