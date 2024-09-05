@@ -14,8 +14,8 @@
 - **분석대상(Y):** `월별 일평균 승차인원수`
 - **활용변수(X):** `Y 변수를 제외한 나머지 변수`
 - **활용 알고리즘 후보:**
-> - Machine Learning 5종: Logistic Regression, Random Forest, XGBoost, LGBM, CatBoost
-> - Deep Learning 2종: Multi-Layer Perception (MLP), Convolutional Neural Network (CNN)
+> - Machine Learning 5종: `Logistic Regression, Random Forest, XGBoost, LGBM, CatBoost`
+> - Deep Learning 2종: `Multi-Layer Perception (MLP), Convolutional Neural Network (CNN)`
   
 ---
 
