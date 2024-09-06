@@ -11,7 +11,7 @@
 > - **Training:** `Random 80%`
 > - **Validation:** `Random 10%`
 > - **Test:** `Random 10%`
-- **분석대상(Y):** `월별 일평균 승차인원수`
+- **분석대상(Y):** `지난 1년간 기부를 1만원 이상 하는지 여부`
 <img width="70%" alt="Y_Donation" src="https://github.com/user-attachments/assets/cd2757a1-591a-46c1-8ee1-660f132611f3">
 
 - **활용변수(X):** `Y 변수를 제외한 나머지 변수`
