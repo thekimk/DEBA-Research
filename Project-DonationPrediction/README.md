@@ -15,6 +15,9 @@
 <img width="70%" alt="Y_Donation" src="https://github.com/user-attachments/assets/cd2757a1-591a-46c1-8ee1-660f132611f3">
 
 - **활용변수(X):** `Y 변수를 제외한 나머지 변수`
+> - 전체 중에 50% 이상이 비어있는 변수는 삭제
+> - 변수 값이 1개만 존재하는 변수는 삭제
+> - 개인정보를 의미하는 ID 등의 변수는 삭제
 - **활용 알고리즘 후보:**
 > - Machine Learning 5종: `Logistic Regression, Random Forest, XGBoost, LGBM, CatBoost`
 > - Deep Learning 2종: `Multi-Layer Perception (MLP), Convolutional Neural Network (CNN)`
