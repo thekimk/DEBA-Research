@@ -19,5 +19,5 @@ npm install puppeteer
 ### 프로젝트 디렉토리로 이동(cmd)
 cd C:\Users\사용자\puppeteer-crawler
 ### Node.js 실행
-예) node naver_crawler.js
+예) node naver_crawler.js  
 예) node watcha_crawler.js
