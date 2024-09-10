@@ -24,8 +24,9 @@
 
 ### 💡KTX 단기수요 예측
 
-- **모델링 검증:**
+**(1) 모델링 검증:**
+<img src="https://github.com/user-attachments/assets/64fd3b6f-3d53-4381-ae2e-490998058a83" width="70%">
 <img src="https://github.com/user-attachments/assets/d824133c-dd40-4f92-99fa-4bad6dd63aaf" width="70%">
 
-- **최적 성능 예측:**
+**(2) 최적 성능 예측:**
 <img src="https://github.com/user-attachments/assets/50823188-3108-4e93-8e5e-2ee9ff7c255a" width="70%">
