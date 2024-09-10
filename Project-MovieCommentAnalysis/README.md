@@ -5,15 +5,19 @@ https://nodejs.org/
 - 설치 후 cmd(명령프롬프트)에서 버전 확인
   ```bash
   node -v
+  ```bash
   npm -v
 
 ### 2. Puppeteer 설치
 - 프로젝트 디렉토리 생성(예시)
-mkdir puppeteer-crawler  
-cd puppeteer-crawler
+  ```bash
+  mkdir puppeteer-crawler
+  ```bash
+  cd puppeteer-crawler
 - npm 초기화(package.json 파일 생성 후 기본적인 설정 입력)
 npm init -y
 - puppeteer 설치
+```bash
 npm install puppeteer
 
 ### 3. 실행 코드
