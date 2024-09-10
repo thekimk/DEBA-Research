@@ -3,7 +3,7 @@
 - 아래 링크를 통한 최신 버전 설치
 https://nodejs.org/
 - 설치 후 cmd(명령프롬프트)에서 버전 확인
-node -v  
+'node -v ' 
 npm -v
 
 ### 2. Puppeteer 설치
