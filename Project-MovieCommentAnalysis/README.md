@@ -3,12 +3,12 @@
 ### 아래 링크를 통한 최신 버전 설치
 https://nodejs.org/
 ### 설치 후 cmd(명령프롬프트)에서 버전 확인
-node -v
+node -v  
 npm -v
 
 ## 2. Puppeteer 설치
 ### 프로젝트 디렉토리 생성(예시)
-mkdir puppeteer-crawler
+mkdir puppeteer-crawler  
 cd puppeteer-crawler
 ### npm 초기화(package.json 파일 생성 후 기본적인 설정 입력)
 npm init -y
