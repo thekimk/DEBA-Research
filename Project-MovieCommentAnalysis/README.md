@@ -4,7 +4,8 @@
 https://nodejs.org/
 - 설치 후 cmd(명령프롬프트)에서 버전 확인
   ```bash
-  node -v  
+  node -v
+  
   ```bash
   npm -v
 
