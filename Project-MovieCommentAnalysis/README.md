@@ -25,6 +25,6 @@ https://nodejs.org/
   cd C:\Users\사용자\puppeteer-crawler
 - Node.js를 사용하여 크롤러 스크립트 실행.
 - 예) 네이버 크롤러와 왓챠 크롤러 실행 명령어
- ```bash
+  ```bash
   node naver_crawler.js  
   node watcha_crawler.js
