@@ -1,7 +1,8 @@
 ## 네이버 영화 및 왓챠피디아 영화 리뷰 크롤러
 ### 1. Node.js 설치
 - 아래 링크를 통한 최신 버전 설치  
-https://nodejs.org/
+https://nodejs.org/  
+  
 - 설치 후 cmd(명령프롬프트)에서 버전 확인
   ```bash
   node -v
