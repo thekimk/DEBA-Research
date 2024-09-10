@@ -3,20 +3,20 @@ const fs = require('fs');
 const { Parser } = require('json2csv');
 const xlsx = require('xlsx');
 
-// 전체 페이지를 스크롤하는 함수(사용 보류)
-async function scrollPageToBottom(page) {
-    let lastHeight = await page.evaluate('document.body.scrollHeight');
+// // 전체 페이지를 스크롤하는 함수(사용 보류)
+// async function scrollPageToBottom(page) {
+//     let lastHeight = await page.evaluate('document.body.scrollHeight');
 
-    while (true) {
-        await page.evaluate('window.scrollBy(0, window.innerHeight * 3)'); // 전체 페이지의 n배 만큼 스크롤
-        await new Promise(resolve => setTimeout(resolve, 500)); // 0.5초 대기
-        let newHeight = await page.evaluate('document.body.scrollHeight');
-        if (newHeight === lastHeight) {
-            break;
-        }
-        lastHeight = newHeight;
-    }
-}
+//     while (true) {
+//         await page.evaluate('window.scrollBy(0, window.innerHeight * 3)'); // 전체 페이지의 n배 만큼 스크롤
+//         await new Promise(resolve => setTimeout(resolve, 500)); // 0.5초 대기
+//         let newHeight = await page.evaluate('document.body.scrollHeight');
+//         if (newHeight === lastHeight) {
+//             break;
+//         }
+//         lastHeight = newHeight;
+//     }
+// }
 
 // 스크롤 가능한 요소 내부에서 스크롤하는 함수(펼쳐보기 후 스크롤)
 async function scrollSectionToBottom(page, selector) {
