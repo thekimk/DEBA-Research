@@ -23,7 +23,7 @@ https://nodejs.org/
 - 프로젝트 디렉토리로 이동(cmd)
   ```bash
   cd C:\Users\사용자\puppeteer-crawler
-- Node.js를 사용하여 크롤러 스크립트 실행.
+- Node.js를 사용하여 크롤러 스크립트 실행.  
  예) 네이버 크롤러와 왓챠 크롤러 실행 명령어
   ```bash
   node naver_crawler.js  
