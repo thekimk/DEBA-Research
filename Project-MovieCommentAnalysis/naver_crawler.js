@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Parser } = require('json2csv');
 const xlsx = require('xlsx');
 
-// // 전체 페이지를 스크롤하는 함수(사용 보류)
+// // 전체 페이지를 스크롤하는 함수
 // async function scrollPageToBottom(page) {
 //     let lastHeight = await page.evaluate('document.body.scrollHeight');
 
