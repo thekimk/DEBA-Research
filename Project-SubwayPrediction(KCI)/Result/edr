@@ -1,0 +1,166 @@
+Table seoul_weather {
+  temperature_c integer
+  precipitation_mm integer
+  wind_speed_ms integer
+  humidity_percent integer
+  snowfall_cm integer
+  date timestamp
+}
+
+Table station_operation_status {
+  line integer 
+  station_name varchar
+  area integer
+  platform_type integer
+  entrances integer
+  transfer_lines integer
+}
+
+Table transfer_passenger_info {
+  line integer
+  station_name varchar
+  transfer_inflow_count integer
+  date timestamp
+}
+
+Table monthly_transportation_passengers {
+  line integer
+  station_name varchar
+  transportation_passenger_count integer
+  date timestamp
+}
+
+Table days_info {
+  year integer
+  month integer
+  week integer
+  day_of_week integer
+  holiday_count integer
+}
+
+Table passengers {
+  line integer
+  station_name varchar
+  train_time timestamp
+  boarding_passengers integer
+  alighting_passengers integer
+  boarding_alighting_sum integer
+  boarding_alighting_diff integer
+  discounted_passengers integer
+  youth_passengers integer
+  date timestamp 
+}
+
+Table subway_congestion_info {
+  line integer
+  station_name integer
+  train_time integer
+  upward_congestion integer
+  downward_congestion integer
+}
+
+Table subway_station_info {
+  station_name_to_station_code integer
+}
+
+Table train_timetable {
+  station_name_to_station_code integer
+  line integer
+  station_name integer
+  train_timetable integer
+  average_interval_by_time integer
+  up_down_train_count integer
+  date timestamp
+}
+
+
+
+Table domestic_oil_statistics {
+  regular_gasoline_price integer
+  diesel_price integer
+  date timestamp
+}
+
+Table vehicle_registration_status {
+  vehicle_registration_count integer
+  date timestamp
+}
+
+Table composite_business_index {
+  coincident_index_cyclical_component integer
+  leading_index_cyclical_component integer
+  date timestamp
+}
+
+Table economically_active_population_survey {
+  monthly_unemployment_rate integer
+  youth_unemployment_rate integer
+  date timestamp
+}
+
+Table regional_population_and_density {
+  seoul_capital_area_population integer
+  population_density integer
+  date timestamp
+}
+
+Table bank_of_korea_economic_statistics{
+  monthly_base_interest_rate integer
+  date timestamp
+}
+
+Table investing_com {
+  usd_to_krw integer
+  date timestamp
+}
+
+Table korea_consumer_price_index {
+  consumer_price_index integer
+  date timestamp
+}
+
+
+Ref: seoul_weather.date > passengers.date 
+
+Ref: station_operation_status.line > passengers.line 
+Ref: station_operation_status.station_name > passengers.station_name 
+
+Ref: transfer_passenger_info.line > passengers.line 
+Ref: transfer_passenger_info.station_name > passengers.station_name 
+Ref: transfer_passenger_info.date > passengers.date
+
+Ref: monthly_transportation_passengers.line > passengers.line 
+Ref: monthly_transportation_passengers.station_name > passengers.station_name 
+Ref: monthly_transportation_passengers.date > passengers.date
+
+Ref: passengers.date > days_info.year
+Ref: passengers.date > days_info.month
+Ref: passengers.date > days_info.week
+Ref: passengers.date > days_info.day_of_week
+Ref: passengers.date > days_info.holiday_count
+
+Ref: subway_congestion_info.line > passengers.line 
+Ref: subway_congestion_info.station_name > passengers.station_name 
+Ref: subway_congestion_info.train_time > passengers.train_time
+
+Ref: subway_station_info.station_name_to_station_code > train_timetable.station_name_to_station_code
+
+Ref : train_timetable.date > passengers.date
+Ref : train_timetable.line > passengers.line
+Ref : train_timetable.station_name > passengers.station_name
+
+Ref: domestic_oil_statistics.date > passengers.date
+
+Ref: vehicle_registration_status.date > passengers.date
+
+Ref: economically_active_population_survey.date > passengers.date
+
+Ref: regional_population_and_density.date > passengers.date
+
+Ref: bank_of_korea_economic_statistics.date > passengers.date
+
+Ref: investing_com.date > passengers.date
+
+Ref: korea_consumer_price_index.date > passengers.date
+
+Ref : composite_business_index.date > passengers.date
