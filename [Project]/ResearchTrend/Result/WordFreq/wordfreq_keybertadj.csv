@@ -1,808 +1,117 @@
 ﻿word,score
-nursing_homes,12
-nursing_home,4
-nursing_norwegian,2
-nursing_abuse,2
-nursing_study,2
-nursing_neglect,2
-nursing_students,1
-nursing_effect,1
-nursing_social,1
-nursing_perspective,1
-nursing_factors,1
-nursing_citations,1
-nursing_attitudes,1
-nursing_patients,1
-nursing_aggression,1
-nursing_role,1
-nursing_care,1
-nursing_visiting,1
-nursing_abuseneglect,1
-nursing_awareness,1
-nursing_scale,1
-nursing_solutions,1
-nursing_scandalous,1
-nursing_conceptual,1
-nursing_living,1
-nursing_professionals,1
-nursing_swiss,1
-nursing_district,1
-abuse_elder,217
-abuse_neglect,79
-abuse_older,14
-abuse_elderly,9
-abuse_screening,9
-abuse_financial,6
-abuse_violence,5
-abuse_risk,5
-abuse_lifetime,5
-abuse_covid19,4
-abuse_systematic,3
-abuse_communitydwelling,3
-abuse_child,3
-abuse_physical,3
-abuse_domestic,3
-abuse_depression,3
-abuse_crosssectional,3
-abuse_emergency,3
-abuse_research,3
-abuse_prevalence,2
-abuse_caregiving,2
-abuse_suspicion,2
-abuse_arab,2
-abuse_iran,2
-abuse_primary,2
-abuse_caregiver,2
-abuse_service,2
-abuse_geriatrics,2
-abuse_psychological,2
-abuse_experiences,2
-abuse_characteristics,2
-abuse_forensic,2
-abuse_united,2
-abuse_rural,2
-abuse_qualitative,2
-abuse_prevention,2
-abuse_geriatric,2
-abuse_sexual,2
-abuse_vulnerable,2
-abuse_identification,2
-abuse_training,2
-abuse_resource,2
-abuse_adult,2
-abuse_mistreatment,2
-abuse_turkey,2
-abuse_victims,2
-abuse_associated,2
-abuse_screen,2
-abuse_vulnerability,2
-abuse_community,2
-abuse_nursing,2
-abuse_occurring,2
-abuse_residenttoresident,1
-abuse_evaluating,1
-abuse_implementing,1
-abuse_populationbased,1
-abuse_african,1
-abuse_intervention,1
-abuse_maltreatment,1
-abuse_person,1
-abuse_people,1
-abuse_perpetrators,1
-abuse_address,1
-abuse_chinese,1
-abuse_morbidity,1
-abuse_malaysia,1
-abuse_lessons,1
-abuse_china,1
-abuse_veterans,1
-abuse_results,1
-abuse_questionnaire,1
-abuse_affecting,1
-abuse_online,1
-abuse_chronic,1
-abuse_forgivable,1
-abuse_residential,1
-abuse_conceptualization,1
-abuse_neglectradiologists,1
-abuse_victimization,1
-abuse_native,1
-abuse_multidisciplinary,1
-abuse_focus,1
-abuse_phenotypes,1
-abuse_hwaleksengstockelder,1
-abuse_life,1
-abuse_perception,1
-abuse_relationship,1
-abuse_south,1
-abuse_continuing,1
-abuse_american,1
-abuse_individuals,1
-abuse_multiple,1
-abuse_substance,1
-abuse_andor,1
-abuse_perpetration,1
-abuse_modules,1
-abuse_reporting,1
-abuse_decision,1
-abuse_subjected,1
-abuse_accusations,1
-elderly_abuse,9
-elderly_women,2
-elderly_individuals,2
-elderly_violence,2
-elderly_population,2
-elderly_care,2
-elderly_neglect,2
-elderly_dissonance,1
-elderly_caregivers,1
-elderly_abandonment,1
-elderly_patient,1
-elderly_neglected,1
-elderly_variables,1
-elderly_multiple,1
-elderly_maltreatment,1
-elderly_people,1
-elderly_emerging,1
-elderly_perceptions,1
-elderly_institutionalized,1
-elderly_communitybased,1
-elderly_state,1
-elderly_structures,1
-elderly_city,1
-elderly_environment,1
-elderly_dementia,1
-elderly_questionnaire,1
-elderly_colombian,1
-elderly_residential,1
-elderly_association,1
-elderly_understanding,1
-elderly_depression,1
-elderly_loneliness,1
-elderly_longterm,1
-elderly_persons,1
-elderly_kingdom,1
-elderly_icu,1
-elderly_europes,1
-elderly_risks,1
-neglect_abuse,79
-neglect_elder,13
-neglect_older,12
-neglect_exploitation,4
-neglect_rural,4
-neglect_home,2
-neglect_systematic,2
-neglect_elderly,2
-neglect_violence,2
-neglect_care,2
-neglect_emergency,2
-neglect_signs,2
-neglect_nursing,2
-neglect_civil,1
-neglect_nshap,1
-neglect_context,1
-neglect_review,1
-neglect_giving,1
-neglect_abandonment,1
-neglect_grounded,1
-neglect_intervention,1
-neglect_elephant,1
-neglect_people,1
-neglect_mature,1
-neglect_china,1
-neglect_making,1
-neglect_iran,1
-neglect_province,1
-neglect_communitydwelling,1
-neglect_focus,1
-neglect_phenomenon,1
-neglect_clue,1
-neglect_central,1
-neglect_caregiver,1
-neglect_child,1
-neglect_homebased,1
-neglect_physical,1
-neglect_andor,1
-neglect_patients,1
-neglect_risk,1
-neglect_malaysian,1
-neglect_long,1
-neglect_depression,1
-neglect_communication,1
-neglect_normalization,1
-neglect_overlooked,1
-neglect_mmctsean,1
-neglect_norwegian,1
-neglect_qualitative,1
-neglect_initiative,1
-neglect_geriatric,1
-neglect_identify,1
-neglect_perceptions,1
-neglect_identified,1
-neglect_burnout,1
-neglect_aged,1
-neglect_family,1
-neglect_midst,1
-neglect_oral,1
-neglect_coronial,1
-neglect_timelines,1
-neglect_educational,1
-neglect_undergraduate,1
-neglect_disadvantaged,1
-neglect_guilty,1
-neglect_related,1
-neglect_new,1
-neglect_novel,1
-neglect_carers,1
-neglect_cases,1
-neglect_health,1
-neglect_mistreatment,1
-neglect_statutory,1
-neglect_ineed,1
-neglect_prove,1
-neglect_examining,1
-neglect_community,1
-neglect_measuring,1
-neglect_longterm,1
-neglect_phenomenological,1
-neglect_punishment,1
-neglect_ethiopia,1
-dementia_people,3
-dementia_caregiving,2
-dementia_adults,2
-dementia_findings,1
-dementia_home,1
-dementia_review,1
-dementia_spain,1
-dementia_acute,1
-dementia_care,1
-dementia_abuse,1
-dementia_incidents,1
-dementia_longterm,1
-dementia_informal,1
-dementia_family,1
-dementia_elderly,1
-dementia_persons,1
-dementia_symptoms,1
-dementia_aging,1
-dementia_behaviors,1
-older_adults,68
-older_people,18
-older_women,17
-older_abuse,14
-older_neglect,12
-older_chinese,10
-older_violence,8
-older_persons,6
-older_exploitation,5
-older_peoples,5
-older_mistreatment,5
-older_communitydwelling,4
-older_study,4
-older_american,3
-older_adult,3
-older_neglected,2
-older_mexican,2
-older_patients,2
-older_mothers,2
-older_caregivers,2
-older_rural,2
-older_atrisk,2
-older_fraud,2
-older_community,2
-older_addressing,1
-older_prevalence,1
-older_african,1
-older_response,1
-older_maltreatment,1
-older_person,1
-older_prospects,1
-older_distress,1
-older_reducing,1
-older_provision,1
-older_understanding,1
-older_victimization,1
-older_latent,1
-older_life,1
-older_50,1
-older_diagnoses,1
-older_relationship,1
-older_injured,1
-older_homes,1
-older_care,1
-older_institutionalized,1
-older_malaysian,1
-older_protections,1
-older_include,1
-older_abused,1
-older_committed,1
-older_anxiety,1
-older_mistreated,1
-older_noninstitutionalized,1
-older_dependent,1
-older_satisfaction,1
-older_israeli,1
-older_ageism,1
-older_examination,1
-older_patient,1
-older_services,1
-older_voices,1
-older_hospitalization,1
-older_dwelling,1
-older_perceptions,1
-older_safeguarding,1
-older_covid19,1
-older_korean,1
-older_institutionalised,1
-older_females,1
-older_experienced,1
-older_turkish,1
-older_rights,1
-older_portuguese,1
-older_data,1
-older_hospitalized,1
-older_issue,1
-older_speaking,1
-older_canadians,1
-older_impact,1
-older_communitybased,1
-older_transgender,1
-older_exploited,1
-older_report,1
-older_harm,1
-older_loneliness,1
-older_discrepancy,1
-older_smart,1
-older_research,1
-older_capable,1
-older_womens,1
-chinese_older,10
-chinese_population,3
-chinese_american,2
-chinese_americans,2
-chinese_maltreatment,2
-chinese_communitydwelling,2
-chinese_context,1
-chinese_kong,1
-chinese_women,1
-chinese_rural,1
-chinese_distress,1
-chinese_helpseeking,1
-chinese_outcomes,1
-chinese_mistreatment,1
-chinese_immigrants,1
-chinese_abuse,1
-chinese_fraud,1
-chinese_victimization,1
-chinese_phenotypes,1
-chinese_peoples,1
-chinese_populations,1
-mistreatment_elder,59
-mistreatment_older,5
-mistreatment_psychological,3
-mistreatment_results,3
-mistreatment_study,3
-mistreatment_intervention,2
-mistreatment_emergency,2
-mistreatment_communitybased,2
-mistreatment_victims,2
-mistreatment_project,2
-mistreatment_abuse,2
-mistreatment_cognitive,2
-mistreatment_mortality,2
-mistreatment_metaanalysis,1
-mistreatment_findings,1
-mistreatment_review,1
-mistreatment_criminal,1
-mistreatment_predicts,1
-mistreatment_prevalence,1
-mistreatment_type,1
-mistreatment_explain,1
-mistreatment_decrease,1
-mistreatment_evaluation,1
-mistreatment_citations,1
-mistreatment_sheltered,1
-mistreatment_childhood,1
-mistreatment_response,1
-mistreatment_medical,1
-mistreatment_methods,1
-mistreatment_risk,1
-mistreatment_singapore,1
-mistreatment_experiences,1
-mistreatment_hospital,1
-mistreatment_pakistani,1
-mistreatment_cases,1
-mistreatment_chinese,1
-mistreatment_cross,1
-mistreatment_substantiated,1
-mistreatment_underserved,1
-mistreatment_investigations,1
-mistreatment_development,1
-mistreatment_suicidal,1
-mistreatment_residential,1
-mistreatment_researchers,1
-mistreatment_conceptualization,1
-mistreatment_rrem,1
-mistreatment_community,1
-mistreatment_priorities,1
-mistreatment_developing,1
-mistreatment_differed,1
-mistreatment_married,1
-mistreatment_latent,1
-mistreatment_longterm,1
-mistreatment_subtypes,1
-mistreatment_usually,1
-mistreatment_life,1
-mistreatment_contextualizing,1
-mistreatment_aging,1
-mistreatment_approaches,1
-mistreatment_neglect,1
-mistreatment_characteristics,1
-caregivers_family,9
-caregivers_older,2
-caregivers_hospitalized,1
-caregivers_home,1
-caregivers_neglected,1
-caregivers_points,1
-caregivers_reporting,1
-caregivers_systematic,1
-caregivers_crosssectional,1
-caregivers_perspectives,1
-caregivers_perceptions,1
-caregivers_insights,1
-caregivers_endoflife,1
-caregivers_residents,1
-caregivers_latent,1
-caregivers_informal,1
-caregivers_elderly,1
-caregivers_vulnerabilities,1
-caregivers_primary,1
-caregivers_caregiver,1
-caregivers_research,1
-women_older,17
-women_elderly,2
-women_ukraine,1
-women_relatives,1
-women_serbia,1
-women_disabilities,1
-women_rural,1
-women_substance,1
-women_activism,1
-women_chinese,1
-women_fleeing,1
-women_assault,1
-women_ghana,1
-women_late,1
-women_community,1
-women_living,1
-women_focus,1
-women_case,1
-women_experienced,1
-women_research,1
-women_taiwan,1
-women_mexican,1
-metaanalysis_review,9
-metaanalysis_prevalence,1
-metaanalysis_mistreatment,1
-metaanalysis_interventions,1
-covid19_abuse,4
-covid19_pandemic,4
-covid19_crisis,2
-covid19_era,2
-covid19_older,1
-covid19_midst,1
-covid19_ageism,1
-covid19_factors,1
-covid19_clients,1
-covid19_adults,1
-covid19_consequences,1
-covid19_invisible,1
-nurses_role,2
-nurses_improving,2
-nurses_detection,2
-nurses_forensic,1
-nurses_evolving,1
-nurses_examining,1
-nurses_plead,1
-elder_abuse,217
-elder_mistreatment,59
-elder_neglect,13
-elder_prevalence,9
-elder_maltreatment,9
-elder_factors,7
-elder_financial,6
-elder_reporting,6
-elder_correlates,6
-elder_victims,6
-elder_screening,5
-elder_perceptions,5
-elder_addressing,4
-elder_experiences,4
-elder_identify,4
-elder_preventing,4
-elder_detection,4
-elder_residenttoresident,3
-elder_address,3
-elder_definitions,3
-elder_ly,3
-elder_physical,3
-elder_s,3
-elder_violence,3
-elder_management,3
-elder_national,3
-elder_detecting,3
-elder_prevention,3
-elder_vulnerable,3
-elder_types,3
-elder_protection,3
-elder_profiles,2
-elder_understanding,2
-elder_responding,2
-elder_issues,2
-elder_patients,2
-elder_risk,2
-elder_malaysian,2
-elder_experiencing,2
-elder_center,2
-elder_analysis,2
-elder_interventions,2
-elder_association,2
-elder_identification,2
-elder_study,2
-elder_fatal,2
-elder_hospitalized,2
-elder_perspectives,2
-elder_impact,2
-elder_cases,2
-elder_consequences,2
-elder_associated,2
-elder_hwaleksengstock,2
-elder_identifying,1
-elder_depiction,1
-elder_underreporting,1
-elder_implementing,1
-elder_attributions,1
-elder_practices,1
-elder_response,1
-elder_intervention,1
-elder_encounter,1
-elder_mistreatmentexamining,1
-elder_trait,1
-elder_selfreported,1
-elder_commentary,1
-elder_support,1
-elder_ipv,1
-elder_victimization,1
-elder_multidisciplinary,1
-elder_differed,1
-elder_impacts,1
-elder_tools,1
-elder_abusea,1
-elder_perception,1
-elder_implications,1
-elder_managing,1
-elder_attitudes,1
-elder_recognition,1
-elder_perpetration,1
-elder_levels,1
-elder_psychological,1
-elder_reported,1
-elder_care,1
-elder_exploring,1
-elder_structures,1
-elder_routine,1
-elder_knowledge,1
-elder_domestic,1
-elder_stop,1
-elder_depression,1
-elder_use,1
-elder_experience,1
-elder_indicators,1
-elder_explanations,1
-elder_suspected,1
-elder_seriousness,1
-elder_australian,1
-elder_assessments,1
-elder_assessment,1
-forensic_center,2
-forensic_abuse,2
-forensic_lens,1
-forensic_pathophysiological,1
-forensic_people,1
-forensic_nurse,1
-forensic_touching,1
-forensic_accounting,1
-forensic_nurses,1
-forensic_services,1
-forensic_challenges,1
-medical_emergency,2
-medical_technicians,2
-medical_new,1
-medical_patients,1
-medical_markers,1
-medical_specialist,1
-medical_college,1
-medical_laboratory,1
-medical_schoolstate,1
-medical_understanding,1
-medical_mistreatment,1
-medical_implications,1
-china_scale,1
-china_abuse,1
-china_prevalence,1
-china_republic,1
-china_pandemic,1
-china_rural,1
-china_neglect,1
-violence_older,8
-violence_partner,8
-violence_sexual,5
-violence_domestic,5
-violence_abuse,5
-violence_life,4
-violence_elder,3
-violence_research,3
-violence_child,2
-violence_genderbased,2
-violence_victims,2
-violence_family,2
-violence_elderly,2
-violence_neglect,2
-violence_reexperiencing,1
-violence_trends,1
-violence_course,1
-violence_united,1
-violence_later,1
-violence_type,1
-violence_examination,1
-violence_rural,1
-violence_types,1
-violence_analysis,1
-violence_intervention,1
-violence_prevention,1
-violence_shadow,1
-violence_grandchildren,1
-violence_screening,1
-violence_health,1
-violence_survey,1
-violence_adults,1
-violence_fleeing,1
-violence_old,1
-violence_youth,1
-violence_associated,1
-violence_invisible,1
-violence_late,1
-violence_residential,1
-violence_hiv,1
-violence_intimate,1
-violence_takes,1
-violence_focus,1
-violence_lethal,1
-violence_phenomenological,1
-violence_nisvs,1
-violence_brazilian,1
-violence_invisibility,1
-geriatric_abuse,2
-geriatric_care,2
-geriatric_institutions,1
-geriatric_emergency,1
-geriatric_injury,1
-geriatric_pharmacotherapy,1
-geriatric_neglect,1
-geriatric_outpatients,1
-geriatric_female,1
-geriatric_clinic,1
-geriatric_health,1
-geriatric_developing,1
-geriatric_service,1
-pandemic_covid19,4
-pandemic_new,1
-pandemic_abuse,1
-pandemic_care,1
-pandemic_old,1
-pandemic_action,1
-pandemic_china,1
-aging_conference,1
-aging_risk,1
-aging_shadow,1
-aging_parents,1
-aging_demographic,1
-aging_health,1
-aging_project,1
-aging_mistreatment,1
-aging_understanding,1
-aging_consumer,1
-aging_physiology,1
-aging_dementia,1
-old_age,5
-old_abuse,2
-old_victimisation,2
-old_theyre,1
-old_er,1
-old_violence,1
-old_people,1
-old_prevalence,1
-old_forgivable,1
-old_est,1
-old_bugs,1
-old_moving,1
-old_pandemic,1
-depression_abuse,3
-depression_affecting,1
-depression_neglect,1
-depression_elder,1
-depression_elderly,1
-depression_risk,1
-depression_caregiver,1
-depression_communitybased,1
-depression_correlation,1
-depression_determining,1
-depression_anxiety,1
-depression_loneliness,1
-polyvictimization_latelife,2
-polyvictimization_later,2
-polyvictimization_practice,1
-polyvictimization_united,1
-polyvictimization_elder,1
-polyvictimization_resilience,1
-polyvictimization_life,1
-polyvictimization_framework,1
-healthcare_professionals,3
-healthcare_settings,1
-healthcare_workers,1
-healthcare_abuse,1
-healthcare_providers,1
-healthcare_primary,1
-healthcare_experiences,1
-healthcare_adults,1
-healthcare_italian,1
-healthcare_service,1
-healthcare_phenomenon,1
-mothers_older,2
-mothers_difficult,1
-mothers_ageing,1
-mothers_subjective,1
-loneliness_analysis,1
-loneliness_effects,1
-loneliness_older,1
-loneliness_imbalance,1
-loneliness_traits,1
-loneliness_elderly,1
-loneliness_vulnerability,1
-loneliness_role,1
-loneliness_matter,1
-loneliness_children,1
-loneliness_depression,1
-ageism_older,1
-ageism_elder,1
-ageism_covid19,1
-ageism_positive,1
-ageism_courtroom,1
-ageism_interplay,1
-hospital_settings,1
-hospital_emergency,1
-hospital_college,1
-hospital_acute,1
-hospital_care,1
-hospital_bangalore,1
-hospital_wards,1
-hospital_mistreatment,1
-homes_nursing,12
-homes_care,6
-homes_age,1
-homes_pokhara,1
-homes_older,1
-homes_special,1
-homes_crosssectional,1
-homes_human,1
-homes_qualitative,1
-homes_perspective,1
-homes_nationwide,1
-homes_mediating,1
-homes_hospitals,1
-homes_sheltered,1
-homes_exploratory,1
-homes_reciprocal,1
-saudi_arabia,2
-saudi_province,1
-saudi_kingdom,1
+dementia symptoms,13
+dementia people,12
+dementia living,11
+dementia persons,8
+dementia elderly,5
+dementia family,4
+dementia person,4
+dementia care,4
+dementia adults,4
+dementia abuse,4
+dementia recruited,3
+dementia spain,3
+dementia residents,3
+dementia diagnosis,2
+dementia informal,2
+dementia adult,2
+dementia caregivers,2
+dementia higher,2
+dementia results,2
+dementia caregiver,2
+dementia immigrants,2
+dementia caregiving,2
+dementia longterm,2
+dementia incidents,2
+dementia acute,2
+dementia moderated,1
+dementia health,1
+dementia assessment,1
+dementia conflict,1
+dementia aging,1
+dementia primary,1
+dementia histories,1
+dementia interviewed,1
+dementia burden,1
+dementia managing,1
+dementia past,1
+dementia stressor,1
+dementia types,1
+dementia regression,1
+dementia recipients,1
+dementia test,1
+dementia personnel,1
+dementia welfare,1
+dementia review,1
+dementia seeking,1
+dementia hand,1
+dementia behaviors,1
+dementia 142,1
+dementia 102115,1
+dementia pandemic,1
+dementia 339,1
+dementia detection,1
+dementia baseline,1
+dementia context,1
+dementia experienced,1
+dementia paper,1
+dementia frail,1
+dementia communitybased,1
+dementia studies,1
+dementia stress,1
+dementia related,1
+dementia presentation,1
+dementia stages,1
+dementia particular,1
+dementia recipient,1
+dementia abused,1
+dementia day,1
+dementia pois,1
+dementia management,1
+dementia common,1
+dementia disease,1
+dementia urgently,1
+dementia ways,1
+dementia intensity,1
+dementia covid19,1
+dementia increased,1
+dementia endstage,1
+dementia morbidity,1
+dementia prevalence,1
+dementia b,1
+dementia dealing,1
+dementia incontinence,1
+dementia evaluate,1
+dementia 453,1
+dementia norway,1
+dementia victim,1
+dementia reduced,1
+dementia participants,1
+dementia 80,1
+dementia represent,1
+dementia seen,1
+dementia relevant,1
+dementia main,1
+dementia findings,1
+dementia andor,1
+dementia england,1
+dementia presence,1
+dementia neurocognitive,1
+dementia impetus,1
+dementia education,1
+iranian version,8
+iranian specificity,2
+iranian elder,1
+iranian community,1
+iranian translated,1
+iranian found,1
+iranian substantial,1
+iranian databases,1
+iranian study,1
+iranian abuse,1
+iranian population,1
+iranian carried,1
+iranian reliability,1
+iranian validity,1
+iranian engine,1
+iranian generally,1
