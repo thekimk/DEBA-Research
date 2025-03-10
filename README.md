@@ -10,7 +10,7 @@
 ### :books: 소그룹 소개 및 운영방법
 - **1기 멤버:** `손도언, 차명주, 장민재, 임보민`
 - **2기 멤버:** `박재흥, 유효정, 조은지, 강보현, 이현서, 방가연`
-- **세부소개 및 올해 프로젝트 계획:** [https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf](https://github.com/thekimk/DEBA-Research/blob/main/%5BDocument%5D/DEBA_Introduction_20250101.pdf)
+- [**세부소개 및 올해 프로젝트 계획**](https://github.com/thekimk/DEBA-Research/blob/main/%5BDocument%5D/DEBA_Introduction_20250101.pdf)
 - **학과혜택(매년변경가능):** 필요 도서 구입이나 회의비 등 `50만원 내 경비 지원` + 향후 무역학부 `다양한 특성화사업 선발에 우대`
 
 ---
