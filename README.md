@@ -14,7 +14,7 @@
 - **1기 멤버:** `손도언, 차명주, 장민재, 임보민`
 - **2기 멤버:** `박재흥, 유효정, 조은지, 강보현, 이현서`
 - **세부소개 및 올해 프로젝트 계획:** [https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf](https://github.com/thekimk/DEBA-Research/blob/main/%5BDocument%5D/DEBA_Introduction_20250101.pdf)
-- **학과혜택:** 소그룹 활동이 필요한 도서 구입이나 회의비 등의 `필요 경비를 100만원 내로 지원`하며,      
+- **학과혜택(매년변경가능):** 소그룹 활동이 필요한 도서 구입이나 회의비 등의 `필요 경비를 50만원 내로 지원`하며,      
 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
   
 ---
