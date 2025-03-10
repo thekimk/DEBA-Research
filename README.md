@@ -1,4 +1,4 @@
-## ✔️ `DEBA(Digital Economy & Business Analytics) 소그룹 멤버 모집`
+## ✔️ `DEBA 소그룹 멤버 모집`
 
 ### :office: 연구실 소개
 - 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
@@ -36,10 +36,9 @@
 
 ### :smirk: 지원자격 및 방법
 
-- 나이/휴학여부/전공이나 학과의 `제한없이 모집`할 것이나, 최소 1년 이상의 소그룹 활동 집중을 위해 `1~3학년 우대`
-- `무역학부 주전공/부전공/복수전공, 그외 타학과 학생` 모두 지원 가능 (단, 지원금은 무역 주전공/부전공/복수전공 학생에만 활용)
-- `비즈니스데이터사이언스이해, 디지털비즈니스애널리틱스 수업이나 유관 수업을 반드시 잘 이수`한 학생
-- 유관 수업이란 `데이터분석 관련 이론 또는 프로그래밍 도구 등을 활용할 수 있는 경험이 포함된 교내외 수업`들을 모두 의미함
+- 나이/휴학여부/학과의 `제한없이 모집`할 것이나, 최소 1년 이상의 활동 집중을 위해 `1~3학년 우대`
+- `비즈니스데이터사이언스이해, 디지털비즈니스애널리틱스 유관 수업을 반드시 잘 이수`한 학생
+- 유관 수업이란 `데이터분석 관련 이론 또는 프로그래밍 도구 등을 활용할 수 있는 경험이 포함된 교내외 수업` 의미함
 > - **모집시기:** `(매년 1학기 4월 전후)` 2025년 ?월 ??일 ~ ?월 ??일
-> - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform) 작성시 지원 완료되며, 합격자는 지원 마감 후 2주일 내 통보 예정
-> - 지원마감 이후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성 및 신청하면, 언제든지 역량과 소그룹 상황을 고려하여 `추가선발!`
+> - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform) 작성시 지원 완료되며, 합격자는 지원 마감 후 2주내 통보 예정
+> - 지원마감 이후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성하면 언제든 역량과 소그룹 상황을 고려하여 `추가선발!`
