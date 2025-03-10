@@ -39,6 +39,6 @@
 - `무역학부 주전공/부전공/복수전공, 그외 타학과 학생` 모두 지원 가능 (단, 지원금은 무역 주전공/부전공/복수전공 학생에만 활용)
 - `비즈니스데이터사이언스이해, 디지털비즈니스애널리틱스 수업이나 유관 수업을 반드시 잘 이수`한 학생
 - 유관 수업이란 `데이터분석 관련 이론 또는 프로그래밍 도구 등을 활용할 수 있는 경험이 포함된 교내외 수업`들을 모두 의미함
-> - **모집시기:** `(매년 1학기 4월 전후)` 2024년 4월 22일 ~ 4월 30일
-> - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)하면 지원이 완료되며, 합격자는 지원 마감 후 2주일 내 통보 예정
+> - **모집시기:** `(매년 1학기 4월 전후)` 2025년 ?월 ??일 ~ ?월 ??일
+> - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform) 작성시 지원 완료되며, 합격자는 지원 마감 후 2주일 내 통보 예정
 > - 지원마감 이후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성 및 신청하면, 역량과 소그룹 상황에 맞춰 추가모집도 언제든 고려
