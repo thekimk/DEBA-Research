@@ -42,4 +42,4 @@
 - 유관 수업이란 `데이터분석 관련 이론 또는 프로그래밍 도구 등을 활용할 수 있는 경험이 포함된 교내외 수업`들을 모두 의미함
 > - **모집시기:** `(매년 1학기 4월 전후)` 2025년 ?월 ??일 ~ ?월 ??일
 > - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform) 작성시 지원 완료되며, 합격자는 지원 마감 후 2주일 내 통보 예정
-> - 지원마감 이후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성 및 신청하면, 역량과 소그룹 상황에 맞춰 추가모집도 언제든 고려
+> - 지원마감 이후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성 및 신청하면, 언제든지 역량과 소그룹 상황을 고려하여 `추가선발!`
