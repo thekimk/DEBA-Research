@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "review", "label": "review", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.03587687751638688, "id": "ea", "label": "ea", "page rank": 0.0007461697377062199, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.016162781877083775, "id": "lifetime", "label": "lifetime", "page rank": 0.0007430725759756284, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.06751118960384106, "id": "common", "label": "common", "page rank": 0.0007459030019517888, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.04507001312610295, "id": "behaviors", "label": "behaviors", "page rank": 0.0007485157703568439, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.0158874628315915, "id": "identification", "label": "identification", "page rank": 0.0007449540727219953, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "characteristics", "label": "characteristics", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.016162781877083775, "id": "younger", "label": "younger", "page rank": 0.0007430725759756284, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "research", "label": "research", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "1", "label": "1", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.016162781877083775, "id": "statistically", "label": "statistically", "page rank": 0.0007430725759756284, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.046146903904276844, "id": "significant", "label": "significant", "page rank": 0.0007448960734519653, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0037512400793650795, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.01795011372199003, "id": "neglected", "label": "neglected", "page rank": 0.0007418632558918415, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.014734106776338103, "id": "low", "label": "low", "page rank": 0.000740908642375208, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "cognitive", "label": "cognitive", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "provide", "label": "provide", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0037512400793650795, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.047934235749183096, "id": "hospitalized", "label": "hospitalized", "page rank": 0.0007436867533681783, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.014734106776338103, "id": "populations", "label": "populations", "page rank": 0.000740908642375208, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "25", "label": "25", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.07382825425682464, "id": "cases", "label": "cases", "page rank": 0.0007522534845278206, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.02875824113072169, "id": "help", "label": "help", "page rank": 0.0007415574552886998, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.0158874628315915, "id": "data", "label": "data", "page rank": 0.0007449540727219953, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "recognized", "label": "recognized", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "83", "label": "83", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.016162781877083775, "id": "relatives", "label": "relatives", "page rank": 0.0007430725759756284, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.01947350621027852, "id": "african", "label": "african", "page rank": 0.0007433897111405807, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.014734106776338103, "id": "globally", "label": "globally", "page rank": 0.000740908642375208, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "past", "label": "past", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "subtypes", "label": "subtypes", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "occurring", "label": "occurring", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0037512400793650795, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.027944821064387722, "id": "respectively", "label": "respectively", "page rank": 0.0007424710883839538, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "severity", "label": "severity", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.037527067576648004, "id": "medical", "label": "medical", "page rank": 0.0007440795044754519, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0037512400793650795, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.012758978692984327, "id": "respect", "label": "respect", "page rank": 0.0007421562140836701, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.05629060136497202, "id": "types", "label": "types", "page rank": 0.0007472093861543163, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "communitybased", "label": "communitybased", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "investigate", "label": "investigate", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.03232556375416755, "id": "screen", "label": "screen", "page rank": 0.0007483254108335338, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0032153486394557824, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.010719677730178984, "id": "deaths", "label": "deaths", "page rank": 0.0007449840638735641, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.016162781877083775, "id": "genderbased", "label": "genderbased", "page rank": 0.0007430725759756284, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0037512400793650795, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.032748393377779704, "id": "exploitation", "label": "exploitation", "page rank": 0.0007433718790678946, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "settings", "label": "settings", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "particular", "label": "particular", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.02875824113072169, "id": "despite", "label": "despite", "page rank": 0.0007415574552886998, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.02875824113072169, "id": "elders", "label": "elders", "page rank": 0.0007415574552886998, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.018763533788324002, "id": "defined", "label": "defined", "page rank": 0.0007409496227965874, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.02233085641176986, "id": "ghana", "label": "ghana", "page rank": 0.0007477175783414216, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.014734106776338103, "id": "respondents", "label": "respondents", "page rank": 0.000740908642375208, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.04232027109656524, "id": "focus", "label": "focus", "page rank": 0.0007489332433256461, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.036301186680176636, "id": "type", "label": "type", "page rank": 0.0007459937211700918, "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

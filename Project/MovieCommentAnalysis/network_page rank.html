@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"betweenness of centality": 0.00039856254827764907, "closeness of centality": 0.002039685737308622, "clustering coefficient": 0.002562111801242236, "color": "#97c2fc", "degree of centality": 0.04965753424657534, "eigenvector of centality": 0.006024102129040178, "id": "\uc7ac\ubbf8\uc788\uac8c", "label": "\uc7ac\ubbf8\uc788\uac8c", "page rank": 0.00043385923954982673, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0015854895991882292, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0004280821917808219, "eigenvector of centality": 0.001367842596974884, "id": "\ubd24\ub2e4", "label": "\ubd24\ub2e4", "page rank": 0.00043444742448221394, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05708909467194232, "id": "\ubc30\uc6b0\ub4e4", "label": "\ubc30\uc6b0\ub4e4", "page rank": 0.0004355531708451279, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0015854895991882292, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0004280821917808219, "eigenvector of centality": 0.001367842596974884, "id": "\uad00\ub78c\ud588\uc5b4\uc694", "label": "\uad00\ub78c\ud588\uc5b4\uc694", "page rank": 0.00043444742448221394, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0015854895991882292, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0004280821917808219, "eigenvector of centality": 0.0027356851933804127, "id": "\uad00\ub78c\ud588\uc2b5\ub2c8\ub2e4", "label": "\uad00\ub78c\ud588\uc2b5\ub2c8\ub2e4", "page rank": 0.0004425807059068709, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.45, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.0650651369712248, "id": "\uc798\ubd24\uc2b5\ub2c8\ub2e4", "label": "\uc798\ubd24\uc2b5\ub2c8\ub2e4", "page rank": 0.0004379832705345534, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0022530641672674837, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.052717920212696515, "id": "\uc798\ubd24\uc5b4\uc694", "label": "\uc798\ubd24\uc5b4\uc694", "page rank": 0.0004366132615557138, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002378234398782344, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.005155682734512013, "id": "\uac15\ucd94\ud569\ub2c8\ub2e4", "label": "\uac15\ucd94\ud569\ub2c8\ub2e4", "page rank": 0.000432679401921094, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.1, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.001965915213625946, "id": "\uad7f", "label": "\uad7f", "page rank": 0.00043580265244573334, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.35, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.057417655414504006, "id": "\uac10\uc0ac\ud569\ub2c8\ub2e4", "label": "\uac10\uc0ac\ud569\ub2c8\ub2e4", "page rank": 0.00044026742661103187, "shape": "dot", "size": 10}, {"betweenness of centality": 0.000356588493541795, "closeness of centality": 0.002476761252446184, "clustering coefficient": 0.0026731614589521205, "color": "#97c2fc", "degree of centality": 0.07962328767123288, "eigenvector of centality": 0.6803218068448468, "id": "\uc88b\uc558\uc5b4\uc694", "label": "\uc88b\uc558\uc5b4\uc694", "page rank": 0.00047062518405065765, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.25, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.053390122620548625, "id": "\uc88b\uc740", "label": "\uc88b\uc740", "page rank": 0.00043847852877226145, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0015854895991882292, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0004280821917808219, "eigenvector of centality": 0.001367842596974884, "id": "\ubcf4\uace0\uc654\uc5b4\uc694", "label": "\ubcf4\uace0\uc654\uc5b4\uc694", "page rank": 0.00043444742448221394, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05639077871661989, "id": "\uc644\uc804", "label": "\uc644\uc804", "page rank": 0.00043273572494473896, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0013662666344000862, "closeness of centality": 0.002889554794520548, "clustering coefficient": 0.0016492200563483518, "color": "#97c2fc", "degree of centality": 0.12756849315068491, "eigenvector of centality": 0.057707020007909886, "id": "\uac10\ub3d9", "label": "\uac10\ub3d9", "page rank": 0.0004400186253644477, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.3, "color": "#97c2fc", "degree of centality": 0.0025684931506849314, "eigenvector of centality": 0.0060421033486791845, "id": "\uac00\uc2b4", "label": "\uac00\uc2b4", "page rank": 0.00043566515119380293, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.08333333333333333, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05259565767741682, "id": "\uac15\ucd94", "label": "\uac15\ucd94", "page rank": 0.0004363808518050792, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0019458281444582812, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0008561643835616438, "eigenvector of centality": 0.00498295894559915, "id": "\uc798\ubcf4\uc558\uc2b5\ub2c8\ub2e4", "label": "\uc798\ubcf4\uc558\uc2b5\ub2c8\ub2e4", "page rank": 0.00043346647146558627, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0011482624935222393, "closeness of centality": 0.002167166095890411, "clustering coefficient": 0.001862428606903402, "color": "#97c2fc", "degree of centality": 0.07705479452054795, "eigenvector of centality": 0.00537222945038158, "id": "\ubc30\uc6b0\ub4e4\uc758", "label": "\ubc30\uc6b0\ub4e4\uc758", "page rank": 0.0004334259638493198, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002378234398782344, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.00725539325322055, "id": "\uc5f0\uae30\uc5d0", "label": "\uc5f0\uae30\uc5d0", "page rank": 0.0004416140796962166, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002378234398782344, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.0064423875044369834, "id": "\uc5f0\uae30\uc640", "label": "\uc5f0\uae30\uc640", "page rank": 0.00043791157860107214, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.4, "color": "#97c2fc", "degree of centality": 0.0025684931506849314, "eigenvector of centality": 0.061152585810883196, "id": "\uc794\uc794\ud55c", "label": "\uc794\uc794\ud55c", "page rank": 0.0004383038867456379, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.38095238095238093, "color": "#97c2fc", "degree of centality": 0.0029965753424657533, "eigenvector of centality": 0.006422784515753272, "id": "\uc601\ud654\ub97c", "label": "\uc601\ud654\ub97c", "page rank": 0.0004377886819126333, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.005150061003725323, "id": "\uc791\ud488", "label": "\uc791\ud488", "page rank": 0.0004329852604683676, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0022530641672674837, "clustering coefficient": 0.3333333333333333, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.005033420199232311, "id": "\ub9c8\uc9c0\ub9c9", "label": "\ub9c8\uc9c0\ub9c9", "page rank": 0.00043281492183525717, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.3333333333333333, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05650576035023365, "id": "\ud55c\ubc88", "label": "\ud55c\ubc88", "page rank": 0.00043484523899459386, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.45, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.03109604356990892, "id": "\uc2a4\ud1a0\ub9ac", "label": "\uc2a4\ud1a0\ub9ac", "page rank": 0.0004402436433730108, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.4, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.009443293331141023, "id": "\uce58\ub9e4", "label": "\uce58\ub9e4", "page rank": 0.00043515610464091114, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002378234398782344, "clustering coefficient": 0.4166666666666667, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.005705914447237053, "id": "\uaf2d", "label": "\uaf2d", "page rank": 0.00043627257757170197, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.35, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.005468670278343586, "id": "\ub208\ubb3c", "label": "\ub208\ubb3c", "page rank": 0.0004339306537712125, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.3, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.057207554696512654, "id": "\ucd5c\uace0", "label": "\ucd5c\uace0", "page rank": 0.0004344601229159879, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.35, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.006118386309630041, "id": "\uac00\uc871\uc758", "label": "\uac00\uc871\uc758", "page rank": 0.00043437339172741797, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.08689573525319937, "id": "\ubc18\uc804", "label": "\ubc18\uc804", "page rank": 0.00044041609767863895, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.4, "color": "#97c2fc", "degree of centality": 0.0025684931506849314, "eigenvector of centality": 0.06532550661405108, "id": "\uac00\uc871", "label": "\uac00\uc871", "page rank": 0.0004395276046059018, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.36666666666666664, "color": "#97c2fc", "degree of centality": 0.0025684931506849314, "eigenvector of centality": 0.06132298109024155, "id": "\uac00\uc871\uacfc", "label": "\uac00\uc871\uacfc", "page rank": 0.00043752280766428336, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002675513698630137, "clustering coefficient": 0.4166666666666667, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.013588019823144183, "id": "\uc624\ub79c\ub9cc\uc5d0", "label": "\uc624\ub79c\ub9cc\uc5d0", "page rank": 0.0004343760175741559, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.4166666666666667, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.056510884604527446, "id": "\ub9ce\uc740", "label": "\ub9ce\uc740", "page rank": 0.00043297759695107204, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.25, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.057014673040588645, "id": "\ub0b4", "label": "\ub0b4", "page rank": 0.00043381867273700026, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0022530641672674837, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.05247339514213711, "id": "\ucd94\ucc9c\ud569\ub2c8\ub2e4", "label": "\ucd94\ucc9c\ud569\ub2c8\ub2e4", "page rank": 0.0004365163717192423, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003057729941291585, "clustering coefficient": 0.36666666666666664, "color": "#97c2fc", "degree of centality": 0.0025684931506849314, "eigenvector of centality": 0.05664602410515236, "id": "\ubaa8\ub4e0", "label": "\ubaa8\ub4e0", "page rank": 0.0004365156307244069, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05677176503138862, "id": "\uc9c4\uc9dc", "label": "\uc9c4\uc9dc", "page rank": 0.0004335454784960465, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.4166666666666667, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.10836585693363476, "id": "\uc601\ud654\uac00", "label": "\uc601\ud654\uac00", "page rank": 0.00043641672826759403, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05281220439328639, "id": "\uc5ec\uc6b4\uc774", "label": "\uc5ec\uc6b4\uc774", "page rank": 0.000437127413733305, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.05266627679806113, "id": "\uc5ed\uc2dc", "label": "\uc5ed\uc2dc", "page rank": 0.00043715782189823, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002518130539887188, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.052236150973243654, "id": "\ub2e4\uc2dc", "label": "\ub2e4\uc2dc", "page rank": 0.0004341744479187529, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0022530641672674837, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.05282245290187398, "id": "\uae30\uc5b5\uc744", "label": "\uae30\uc5b5\uc744", "page rank": 0.0004330241999814637, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028538812785388126, "clustering coefficient": 0.1, "color": "#97c2fc", "degree of centality": 0.0021404109589041095, "eigenvector of centality": 0.05298230783249211, "id": "\ub9ce\uc774", "label": "\ub9ce\uc774", "page rank": 0.00043512187579685107, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0016464699683877767, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0008561643835616438, "eigenvector of centality": 0.0010010549911357756, "id": "\ubd80\ubaa8\ub2d8\uc774\ub791", "label": "\ubd80\ubaa8\ub2d8\uc774\ub791", "page rank": 0.0004344860545599057, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0022530641672674837, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.0012842465753424657, "eigenvector of centality": 0.0023779351331488247, "id": "\uc88b\uc558\uc2b5\ub2c8\ub2e4", "label": "\uc88b\uc558\uc2b5\ub2c8\ub2e4", "page rank": 0.0004380016975993461, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.002378234398782344, "clustering coefficient": 0.08333333333333333, "color": "#97c2fc", "degree of centality": 0.0017123287671232876, "eigenvector of centality": 0.00150996768149077, "id": "\uac10\ub3d9\uc801\uc774\uc5c8\uc5b4\uc694", "label": "\uac10\ub3d9\uc801\uc774\uc5c8\uc5b4\uc694", "page rank": 0.0004330915586375143, "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\ubd24\ub2e4", "width": 3}, {"Viewing": 2022, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\ubc30\uc6b0\ub4e4", "width": 1}, {"Viewing": 2020, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uad00\ub78c\ud588\uc5b4\uc694", "width": 3}, {"Viewing": 2021, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uad00\ub78c\ud588\uc2b5\ub2c8\ub2e4", "width": 6}, {"Viewing": 2021, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc798\ubd24\uc2b5\ub2c8\ub2e4", "width": 1}, {"Viewing": 2021, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc798\ubd24\uc5b4\uc694", "width": 2}, {"Viewing": 2022, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uac15\ucd94\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2024, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uad7f", "width": 1}, {"Viewing": 2024, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uac10\uc0ac\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2024, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc88b\uc558\uc5b4\uc694", "width": 1}, {"Viewing": 2024, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc7ac\ubbf8\uc788\uac8c", "width": 1}, {"Viewing": 2021, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc88b\uc740", "width": 1}, {"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\ubcf4\uace0\uc654\uc5b4\uc694", "width": 3}, {"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc644\uc804", "width": 1}, {"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uac10\ub3d9", "width": 1}, {"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uac00\uc2b4", "width": 1}, {"Viewing": 2015, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uac15\ucd94", "width": 1}, {"Viewing": 2021, "from": "\uc7ac\ubbf8\uc788\uac8c", "to": "\uc798\ubcf4\uc558\uc2b5\ub2c8\ub2e4", "width": 2}, {"Viewing": 2015, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc88b\uc740", "width": 1}, {"Viewing": 2021, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc5f0\uae30\uc5d0", "width": 7}, {"Viewing": 2021, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc5f0\uae30\uc640", "width": 5}, {"Viewing": 2022, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc794\uc794\ud55c", "width": 1}, {"Viewing": 2019, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc601\ud654\ub97c", "width": 1}, {"Viewing": 2015, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uac10\ub3d9", "width": 1}, {"Viewing": 2015, "from": "\ubc30\uc6b0\ub4e4\uc758", "to": "\uc791\ud488", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\ubc30\uc6b0\ub4e4", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\ub9c8\uc9c0\ub9c9", "width": 1}, {"Viewing": 2024, "from": "\uac10\ub3d9", "to": "\ud55c\ubc88", "width": 1}, {"Viewing": 2024, "from": "\uac10\ub3d9", "to": "\uc88b\uc558\uc5b4\uc694", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uc2a4\ud1a0\ub9ac", "width": 1}, {"Viewing": 2023, "from": "\uac10\ub3d9", "to": "\uce58\ub9e4", "width": 1}, {"Viewing": 2009, "from": "\uac10\ub3d9", "to": "\uac10\ub3d9", "width": 1}, {"Viewing": 2014, "from": "\uac10\ub3d9", "to": "\uc794\uc794\ud55c", "width": 1}, {"Viewing": 2014, "from": "\uac10\ub3d9", "to": "\uaf2d", "width": 1}, {"Viewing": 2017, "from": "\uac10\ub3d9", "to": "\ub208\ubb3c", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\ucd5c\uace0", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uac00\uc871\uc758", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\ubc18\uc804", "width": 1}, {"Viewing": 2016, "from": "\uac10\ub3d9", "to": "\uac00\uc871", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uac00\uc871\uacfc", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uac10\uc0ac\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uc798\ubd24\uc2b5\ub2c8\ub2e4", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uac15\ucd94\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uc624\ub79c\ub9cc\uc5d0", "width": 1}, {"Viewing": 2015, "from": "\uac10\ub3d9", "to": "\uc644\uc804", "width": 1}, {"Viewing": 2016, "from": "\uac10\ub3d9", "to": "\ub9ce\uc740", "width": 1}, {"Viewing": 2017, "from": "\uac10\ub3d9", "to": "\ub0b4", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc88b\uc558\uc5b4\uc694", "width": 1}, {"Viewing": 2020, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uac10\uc0ac\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2022, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc88b\uc740", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ucd94\ucc9c\ud569\ub2c8\ub2e4", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc798\ubd24\uc5b4\uc694", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uac00\uc871\uacfc", "width": 1}, {"Viewing": 2024, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ubaa8\ub4e0", "width": 1}, {"Viewing": 2024, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uac15\ucd94", "width": 1}, {"Viewing": 2019, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc9c4\uc9dc", "width": 1}, {"Viewing": 2019, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc794\uc794\ud55c", "width": 1}, {"Viewing": 2020, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc601\ud654\uac00", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc5ec\uc6b4\uc774", "width": 1}, {"Viewing": 2020, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc644\uc804", "width": 1}, {"Viewing": 2020, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc5ed\uc2dc", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ubc30\uc6b0\ub4e4", "width": 1}, {"Viewing": 2020, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ud55c\ubc88", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ub2e4\uc2dc", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ub0b4", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uae30\uc5b5\uc744", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uac00\uc871", "width": 1}, {"Viewing": 2015, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ubc18\uc804", "width": 1}, {"Viewing": 2017, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ub9ce\uc774", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ub9ce\uc740", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\ucd5c\uace0", "width": 1}, {"Viewing": 2021, "from": "\uc88b\uc558\uc5b4\uc694", "to": "\uc798\ubd24\uc2b5\ub2c8\ub2e4", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

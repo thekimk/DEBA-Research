@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"betweenness of centality": 0.00014783075677528399, "closeness of centality": 0.003543083900226757, "clustering coefficient": 0.009811616954474097, "color": "#97c2fc", "degree of centality": 0.03943452380952381, "eigenvector of centality": 0.03319469843170498, "id": "pandemic", "label": "pandemic", "page rank": 0.0008333157475769537, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0042871315192743766, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.01800421534125127, "id": "domestic", "label": "domestic", "page rank": 0.0007854143967026666, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0034626831501831505, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.019856791522956933, "id": "hospitals", "label": "hospitals", "page rank": 0.0007717010367378894, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003914337474120083, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.0131343884668651, "id": "time", "label": "time", "page rank": 0.0007661360365689554, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.005295868347338936, "clustering coefficient": 0.3, "color": "#97c2fc", "degree of centality": 0.003720238095238095, "eigenvector of centality": 0.0323217801599926, "id": "include", "label": "include", "page rank": 0.0007680060414351762, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0042871315192743766, "clustering coefficient": 0.4166666666666667, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.05403380911949412, "id": "prevalence", "label": "prevalence", "page rank": 0.0007651007875075572, "shape": "dot", "size": 10}, {"betweenness of centality": 0.006004033997565271, "closeness of centality": 0.004650297619047619, "clustering coefficient": 0.0008803282074932384, "color": "#97c2fc", "degree of centality": 0.6808035714285714, "eigenvector of centality": 0.21133111369026375, "id": "abuse", "label": "abuse", "page rank": 0.0008875468427909466, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0042871315192743766, "clustering coefficient": 0.5833333333333334, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.06222274884869057, "id": "physical", "label": "physical", "page rank": 0.0007701060202990517, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0027786549746480877, "closeness of centality": 0.005314625850340136, "clustering coefficient": 0.015035487485991782, "color": "#97c2fc", "degree of centality": 0.07886904761904762, "eigenvector of centality": 0.10021693734926715, "id": "older", "label": "older", "page rank": 0.0008269143446878537, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003914337474120083, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.052410802389530046, "id": "financial", "label": "financial", "page rank": 0.0007770294362478527, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0010238272524199553, "closeness of centality": 0.0033820346320346316, "clustering coefficient": 0.006137108584978032, "color": "#97c2fc", "degree of centality": 0.17857142857142855, "eigenvector of centality": 0.1854228328907337, "id": "mistreatment", "label": "mistreatment", "page rank": 0.0009235622867961892, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004738408521303259, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.04602938590366642, "id": "health", "label": "health", "page rank": 0.0007741212792585694, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0005208887352409319, "closeness of centality": 0.004133597883597883, "clustering coefficient": 0.03639846743295019, "color": "#97c2fc", "degree of centality": 0.04538690476190476, "eigenvector of centality": 0.0584482633353312, "id": "elder", "label": "elder", "page rank": 0.0007740761727439487, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0036011904761904766, "clustering coefficient": 0.8333333333333334, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.042334555745099235, "id": "detection", "label": "detection", "page rank": 0.0007670556192452274, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0042871315192743766, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.08855869000688216, "id": "home", "label": "home", "page rank": 0.0008376274053914511, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004738408521303259, "clustering coefficient": 0.65, "color": "#97c2fc", "degree of centality": 0.003720238095238095, "eigenvector of centality": 0.16237320005664918, "id": "patients", "label": "patients", "page rank": 0.0008081112751372106, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004738408521303259, "clustering coefficient": 0.43333333333333335, "color": "#97c2fc", "degree of centality": 0.004464285714285714, "eigenvector of centality": 0.09362307632755439, "id": "study", "label": "study", "page rank": 0.0007671858737586169, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0042871315192743766, "clustering coefficient": 0.6666666666666666, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.11019898333144625, "id": "individuals", "label": "individuals", "page rank": 0.0007821368297592828, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0010959328351593802, "closeness of centality": 0.004133597883597883, "clustering coefficient": 0.012418221468378968, "color": "#97c2fc", "degree of centality": 0.0974702380952381, "eigenvector of centality": 0.16821929966370602, "id": "elderly", "label": "elderly", "page rank": 0.0008065155479508435, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003914337474120083, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.010541619289823757, "id": "analysis", "label": "analysis", "page rank": 0.0007650336661109465, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004738408521303259, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.01663726961006483, "id": "particularly", "label": "particularly", "page rank": 0.0007717093541578154, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0016132573810114762, "closeness of centality": 0.003916040100250626, "clustering coefficient": 0.010389778007227672, "color": "#97c2fc", "degree of centality": 0.09449404761904762, "eigenvector of centality": 0.13041603419887862, "id": "women", "label": "women", "page rank": 0.000796323335402039, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004501488095238096, "clustering coefficient": 0.75, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.07015801207686674, "id": "population", "label": "population", "page rank": 0.0007676941936817777, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003914337474120083, "clustering coefficient": 1.0, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.039726876854515564, "id": "maltreatment", "label": "maltreatment", "page rank": 0.0007639421405430218, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 0.3333333333333333, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.040690231586938096, "id": "aged", "label": "aged", "page rank": 0.0007657139568009523, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0060019841269841265, "clustering coefficient": 0.42857142857142855, "color": "#97c2fc", "degree of centality": 0.005208333333333333, "eigenvector of centality": 0.15735602037506394, "id": "care", "label": "care", "page rank": 0.000854087942177171, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004738408521303259, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.002976190476190476, "eigenvector of centality": 0.054174775103237045, "id": "residents", "label": "residents", "page rank": 0.0007628535147988409, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0009501427153139737, "closeness of centality": 0.0025656814449917897, "clustering coefficient": 0.001881560705090117, "color": "#97c2fc", "degree of centality": 0.07514880952380952, "eigenvector of centality": 0.12888100350041204, "id": "homes", "label": "homes", "page rank": 0.0009200580353853559, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.00500165343915344, "clustering coefficient": 0.45, "color": "#97c2fc", "degree of centality": 0.003720238095238095, "eigenvector of centality": 0.07619415578140247, "id": "persons", "label": "persons", "page rank": 0.0007799471022775456, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003104474548440066, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.019349899454106465, "id": "justice", "label": "justice", "page rank": 0.0007639202244345666, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.5245499446790977, "id": "adults", "label": "adults", "page rank": 0.001011691918825355, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.003914337474120083, "clustering coefficient": 0.16666666666666666, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.0496356326922618, "id": "professionals", "label": "professionals", "page rank": 0.0007940509488192463, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.004092261904761905, "clustering coefficient": 0.5, "color": "#97c2fc", "degree of centality": 0.002232142857142857, "eigenvector of centality": 0.07201394004461843, "id": "em", "label": "em", "page rank": 0.0007644816533025207, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0033344356261022926, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.001488095238095238, "eigenvector of centality": 0.009315738393352384, "id": "epidemic", "label": "epidemic", "page rank": 0.0007669478828055864, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "infections", "label": "infections", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0025722789115646258, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.029463777445969046, "id": "items", "label": "items", "page rank": 0.000770452236678523, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "critically", "label": "critically", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0010938238948521378, "id": "crisis", "label": "crisis", "page rank": 0.0007910319261199456, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "large", "label": "large", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "ageism", "label": "ageism", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "era", "label": "era", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0025722789115646258, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.03535653293516286, "id": "tools", "label": "tools", "page rank": 0.0007769787357906829, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "invisible", "label": "invisible", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "designed", "label": "designed", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "nearly", "label": "nearly", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "infection", "label": "infection", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0029041858678955455, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.02478480836546386, "id": "staff", "label": "staff", "page rank": 0.0007728655669384216, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "suppression", "label": "suppression", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "outbreaks", "label": "outbreaks", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}, {"betweenness of centality": 0.0, "closeness of centality": 0.0028134300595238095, "clustering coefficient": 0, "color": "#97c2fc", "degree of centality": 0.000744047619047619, "eigenvector of centality": 0.0005469119474260689, "id": "stimulate", "label": "stimulate", "page rank": 0.0007644258336188342, "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"Category": "medical", "from": "pandemic", "to": "pandemic", "width": 1}, {"Category": "medical", "from": "pandemic", "to": "domestic", "width": 1}, {"Category": "medical", "from": "pandemic", "to": "hospitals", "width": 1}, {"Category": "social science", "from": "pandemic", "to": "time", "width": 2}, {"Category": "social science", "from": "pandemic", "to": "include", "width": 1}, {"Category": "law", "from": "pandemic", "to": "prevalence", "width": 1}, {"Category": "law", "from": "abuse", "to": "physical", "width": 1}, {"Category": "law", "from": "abuse", "to": "older", "width": 1}, {"Category": "law", "from": "abuse", "to": "financial", "width": 1}, {"Category": "medical", "from": "abuse", "to": "pandemic", "width": 1}, {"Category": "social science", "from": "abuse", "to": "mistreatment", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "health", "width": 1}, {"Category": "law", "from": "abuse", "to": "elder", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "abuse", "width": 1}, {"Category": "social science", "from": "abuse", "to": "detection", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "home", "width": 1}, {"Category": "medical", "from": "abuse", "to": "patients", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "study", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "prevalence", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "individuals", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "elderly", "width": 1}, {"Category": "social science", "from": "abuse", "to": "analysis", "width": 1}, {"Category": "medical", "from": "abuse", "to": "particularly", "width": 1}, {"Category": "social science", "from": "abuse", "to": "domestic", "width": 1}, {"Category": "law", "from": "abuse", "to": "women", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "include", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "population", "width": 1}, {"Category": "social science", "from": "abuse", "to": "maltreatment", "width": 1}, {"Category": "social science", "from": "abuse", "to": "time", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "aged", "width": 1}, {"Category": "social science", "from": "abuse", "to": "care", "width": 1}, {"Category": "health/care", "from": "abuse", "to": "residents", "width": 1}, {"Category": "medical", "from": "homes", "to": "physical", "width": 1}, {"Category": "medical", "from": "homes", "to": "include", "width": 1}, {"Category": "health/care", "from": "homes", "to": "study", "width": 1}, {"Category": "social science", "from": "homes", "to": "older", "width": 1}, {"Category": "social science", "from": "homes", "to": "elder", "width": 1}, {"Category": "social science", "from": "homes", "to": "particularly", "width": 1}, {"Category": "health/care", "from": "homes", "to": "hospitals", "width": 3}, {"Category": "social science", "from": "homes", "to": "elderly", "width": 1}, {"Category": "social science", "from": "homes", "to": "aged", "width": 2}, {"Category": "health/care", "from": "homes", "to": "residents", "width": 1}, {"Category": "health/care", "from": "homes", "to": "persons", "width": 1}, {"Category": "health/care", "from": "elder", "to": "mistreatment", "width": 1}, {"Category": "health/care", "from": "elder", "to": "patients", "width": 1}, {"Category": "medical", "from": "elder", "to": "physical", "width": 1}, {"Category": "medical", "from": "elder", "to": "elderly", "width": 1}, {"Category": "medical", "from": "elder", "to": "persons", "width": 1}, {"Category": "law", "from": "elder", "to": "maltreatment", "width": 5}, {"Category": "social science", "from": "elder", "to": "financial", "width": 1}, {"Category": "social science", "from": "elder", "to": "justice", "width": 1}, {"Category": "health/care", "from": "elder", "to": "care", "width": 1}, {"Category": "social science", "from": "elderly", "to": "persons", "width": 1}, {"Category": "social science", "from": "elderly", "to": "adults", "width": 1}, {"Category": "health/care", "from": "elderly", "to": "individuals", "width": 1}, {"Category": "health/care", "from": "elderly", "to": "patients", "width": 1}, {"Category": "health/care", "from": "elderly", "to": "population", "width": 1}, {"Category": "health/care", "from": "elderly", "to": "residents", "width": 1}, {"Category": "social science", "from": "elderly", "to": "women", "width": 1}, {"Category": "social science", "from": "elderly", "to": "health", "width": 1}, {"Category": "social science", "from": "elderly", "to": "care", "width": 1}, {"Category": "social science", "from": "elderly", "to": "maltreatment", "width": 2}, {"Category": "social science", "from": "elderly", "to": "home", "width": 1}, {"Category": "health/care", "from": "elderly", "to": "study", "width": 1}, {"Category": "social science", "from": "elderly", "to": "elderly", "width": 1}, {"Category": "social science", "from": "women", "to": "prevalence", "width": 1}, {"Category": "medical", "from": "women", "to": "women", "width": 1}, {"Category": "medical", "from": "women", "to": "older", "width": 1}, {"Category": "social science", "from": "women", "to": "population", "width": 1}, {"Category": "health/care", "from": "women", "to": "aged", "width": 3}, {"Category": "social science", "from": "women", "to": "study", "width": 1}, {"Category": "health/care", "from": "women", "to": "home", "width": 1}, {"Category": "health/care", "from": "women", "to": "professionals", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "older", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "em", "width": 1}, {"Category": "medical", "from": "mistreatment", "to": "epidemic", "width": 1}, {"Category": "medical", "from": "mistreatment", "to": "persons", "width": 1}, {"Category": "medical", "from": "mistreatment", "to": "detection", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "study", "width": 1}, {"Category": "social science", "from": "mistreatment", "to": "include", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "elderly", "width": 1}, {"Category": "social science", "from": "mistreatment", "to": "professionals", "width": 1}, {"Category": "social science", "from": "mistreatment", "to": "prevalence", "width": 1}, {"Category": "social science", "from": "mistreatment", "to": "health", "width": 1}, {"Category": "social science", "from": "mistreatment", "to": "care", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "physical", "width": 1}, {"Category": "health/care", "from": "mistreatment", "to": "financial", "width": 1}, {"Category": "health/care", "from": "older", "to": "adults", "width": 1}, {"Category": "health/care", "from": "older", "to": "persons", "width": 1}, {"Category": "health/care", "from": "older", "to": "individuals", "width": 1}, {"Category": "health/care", "from": "older", "to": "patients", "width": 1}, {"Category": "health/care", "from": "older", "to": "population", "width": 1}, {"Category": "health/care", "from": "older", "to": "residents", "width": 1}, {"Category": "social science", "from": "older", "to": "care", "width": 1}, {"Category": "social science", "from": "older", "to": "older", "width": 1}, {"Category": "health/care", "from": "older", "to": "em", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
