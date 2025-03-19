@@ -1,0 +1,101 @@
+
+딥러닝 환경 GPU 세팅하기 (Windows 11)
+
+
+목차
+
+1. GPU 확인
+2. NVIDIA DRIVER
+3. Visual Studio
+4. CUDA Toolkit
+5. Cudnn
+6. 가상환경
+7. 기본 패키지 설치
+
+
+
+작성자 : 인천대학교 무역학부 차명주
+
+
+
+0. 최종 환경세팅(참고)
+ 
+tensorflow_gpu : 2.10.0
+Python 버전 : 3.9
+cuDNN : 8.8.1
+CUDA : 12.1
+
+1. GPU 확인
+
+	내PC -> 속성 -> 장치 관리자 -> 디스플레이 어뎁터 -> NVIDIA GeForce RTX 3090 
+
+
+2. NVIDIA DRIVER 설치 
+
+본인의 GPU 모델에 맞는 드라이버를 다운로드 합니다.
+본인의 경우 RTX 3090이기 때문에 3090에 맞는 드라이버를 설치해주었습니다.
+링크 : https://www.nvidia.com/download/index.aspx?lang=en-us
+
+
+3. Visual Studio Community 2019 다운로드
+	
+	링크 : https://visualstudio.microsoft.com/ko/vs/older-downloads/
+
+
+4. CUDA Toolkit 다운로드
+
+CUDA Toolkit 에서 CUDA 버전을 확인하여 다운로드 합니다.
+=> CUDA Toolkit 12.1.0 버전 다운로드
+
+5.. cuDNN 다운로드
+
+cuDNN Archive에서 CUDA Toolkit과 매칭되는 버전을 다운로드 합니다.
+이전에 CUDA 12.1 버전을 다운로드 했기 때문에 
+(cuDNN v8.9.4 (August 8th, 2023), for CUDA 12.x)를  Zip형식으로 설치했습니다.
+링크 : https://developer.nvidia.com/rdp/cudnn-archive
+
+압축파일을 풀게되면 lib include bin 폴더를 확인할 수 있습니다. 
+환경변수가 제대로 등록될 수 있도록, 각 폴더에 들어가서 모든 파일들을 
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\ 경로에 각각 붙여넣어 주어야 합니다.
+
+lib -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib
+bin -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin
+include -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include
+
+
+6. 가상환경 생성
+
+
+0. 가상 환경을 생성하는 이유는 다른 프로젝트들과 라이브러리 충돌을 피하기 위함입니다. 
+1. Anaconda Powershell Prompt (anaconda3) 실행
+2. 가상 환경 설치 : conda create -n 가상환경이름 python=3.9
+3. 가상 환경 활성화 : conda activate 가상환경 이름
+
+
+7. 기본 패키지 최종설치 
+
+ pip install --upgrade pip --user
+ pip install tensorflow==2.10.0
+pip install pandas matplotlib seaborn scipy sklearn
+pip install tensorflow-gpu==2.10.0
+pip install keras
+pip3 install torch torchvision torchaudio —index-url https://download.pytorch.org/whl/cu121 
+pip install jupyter notebook
+pip install ipykernel
+python -m ipykernel install --user --name 가상환경이름 --display-name 표시할 가상환경 이름
+
+
+* tensorflow_gpu-2.10.0 이어도 cuda =12.1 과 cuDNN =8.81 과 함께 사용가능
+
+
+GPU 사용 가능여부체크
+
+# tensorflow test메소드를 통한 체크
+import tensorflow as tf
+tf.test.is_built_with_cuda()   
+
+
+# device_lib를 통한 체크
+# 실행결과에 cpu, gpu 둘 다 나와야 정상 
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
