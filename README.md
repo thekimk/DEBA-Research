@@ -45,6 +45,6 @@
 - **모집인원:** 약 10명 내외
 - **지원자격:** `나이/휴학여부/전공 제한없음` + `비즈니스데이터사이언스의이해 & 디지털비즈니스애널리틱스 등 교내외 유관 수업 이수`
 - **우대사항:** 1년 이상의 집중적인 활동을 위해 `1~3학년` + `타 소그룹 미활동`
-- **필수활동:** BASA 어쏘의 집중적인 스터디와 프로젝트 공유 활동에 빠지지 않고 참석 필수! 
+- **필수활동:** BASA 어쏘의 집중적인 스터디와 프로젝트 공유 활동에 빠지지 않고 `참석 필수!`
 - **지원방법:** [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform) 작성시 지원 완료되며, 합격자는 지원 마감 후 2주내 통보 예정
 - **추가선발:** 지원마감 후에도 [`구글 폼`](https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform)을 작성하면 언제든 역량과 소그룹 상황을 고려하여 `추가선발!`
