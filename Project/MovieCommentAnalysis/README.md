@@ -13,19 +13,24 @@ https://nodejs.org/
   ```bash
   mkdir puppeteer-crawler  
   cd puppeteer-crawler
-- npm 초기화(package.json 파일 생성 후 기본적인 설정 입력)
-  ```bash
+- package.json 파일 생성(프로젝트 정보 및 라이브러리 기록파일)
   npm init -y
 - puppeteer 설치
   ```bash
   npm install puppeteer
+- 모듈 설치
+  ```bash
+  npm install json2csv cli-progress
 
-### 3. 실행 코드
+### 3. 실행 방법
 - 프로젝트 디렉토리로 이동(cmd)
   ```bash
   cd C:\Users\사용자\puppeteer-crawler
-- Node.js를 사용하여 크롤러 스크립트 실행.  
- 예) 네이버 크롤러와 왓챠 크롤러 실행 명령어
+- Node.js를 사용하여 크롤러 스크립트 실행
   ```bash
-  node naver_crawler.js  
-  node watcha_crawler.js
+  node 파일명.js
+
+### 속도 최적화 팁
+- headless 모드 활성화(기본세팅: false)
+  ```bash
+  headless: true
