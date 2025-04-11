@@ -14,6 +14,7 @@ https://nodejs.org/
   mkdir puppeteer-crawler  
   cd puppeteer-crawler
 - package.json 파일 생성(프로젝트 정보 및 라이브러리 기록파일)
+  ```bash
   npm init -y
 - puppeteer 설치
   ```bash
