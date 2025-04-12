@@ -9,10 +9,10 @@ https://nodejs.org/
   npm -v
 
 ### 2. Puppeteer 설치
-- 프로젝트 디렉토리 생성(예시)
+- 프로젝트 디렉토리 생성 및 이동
   ```bash
   mkdir puppeteer-crawler  
-  cd puppeteer-crawler
+  cd C:\Users\사용자\puppeteer-crawler
 - package.json 파일 생성(프로젝트 정보 및 라이브러리 기록파일)
   ```bash
   npm init -y
@@ -21,15 +21,13 @@ https://nodejs.org/
   npm install puppeteer
 - 모듈 설치
   ```bash
-  npm install json2csv cli-progress
+  npm install json2csv
+  npm install cli-progress
 
 ### 3. 실행 방법
-- 프로젝트 디렉토리로 이동(cmd)
-  ```bash
-  cd C:\Users\사용자\puppeteer-crawler
 - Node.js를 사용하여 크롤러 스크립트 실행
   ```bash
-  node 파일명.js
+  node naver-news.js
 
 ### 속도 최적화 팁
 - headless 모드 활성화(기본세팅: false)
