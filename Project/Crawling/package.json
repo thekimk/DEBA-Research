@@ -1,0 +1,17 @@
+{
+  "name": "crawling",
+  "version": "1.0.0",
+  "description": "- 아래 링크를 통한 최신 버전 설치하되 추가 체크할 건 없이 change -> next만 쭉 진행하면 됨  \r https://nodejs.org/",
+  "main": "naver-news.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cli-progress": "^3.12.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "puppeteer": "^24.6.1"
+  }
+}
