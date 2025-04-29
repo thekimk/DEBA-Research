@@ -22,7 +22,7 @@ https://nodejs.org/
   ```bash
   npm install json2csv
   npm install cli-progress
-  npm install p-limit
+  npm install p-limit@2
 
 ### 3. 파일 준비(파일탐색기)
 - `naver-news.js & config.json` 2개의 파일을 `C:\Users\사용자\puppeteer-crawler`에 붙여넣기
