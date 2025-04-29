@@ -25,6 +25,7 @@ https://nodejs.org/
   npm install cli-progress
 
 ### 3. 실행 방법
+- `naver-news.js & config.json` 2개의 파일을 `C:\Users\사용자\puppeteer-crawler`에 붙여넣기
 - Node.js를 사용하여 크롤러 스크립트 실행
   ```bash
   node naver-news.js
