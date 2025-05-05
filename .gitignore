@@ -8,3 +8,7 @@ Project/MovieCommentAnalysis/outputs/
 Project/MovieCommentAnalysis/Model/
 Project/CSRTrendAnalysis/Data/NaverNews_키워드전체카테고리사회.csv
 Project/CSRTrendAnalysis/Data/df_prepcateg2_(1,2).csv
+Project/CSRTrendAnalysis/Result/WordFreq/co_categ_edgelist_direct.csv
+Project/CSRTrendAnalysis/Result/WordFreq/co_categ_edgelist_undirect.csv
+Project/CSRTrendAnalysis/Result/WordFreq/co_edgelist_direct.csv
+Project/CSRTrendAnalysis/Result/WordFreq/co_edgelist_undirect.csv
