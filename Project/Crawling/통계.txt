@@ -1,8 +1,0 @@
-Total articles collected: 3082
-Naver news articles: 1069
-All articles saved to AI 디지털 교과서_20221001-20250330.json
-All articles saved to AI 디지털 교과서_20221001-20250330.csv
-Naver articles saved to AI 디지털 교과서_naver_20221001-20250330.json
-Naver articles saved to AI 디지털 교과서_naver_20221001-20250330.csv
-Total time: 0h 32m 7s (1927225 ms)
-Program finished.
