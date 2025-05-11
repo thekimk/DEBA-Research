@@ -23,6 +23,7 @@ https://nodejs.org/
   ```bash
   npm install json2csv
   npm install cli-progress
+  npm install p-limit
 
 ### 3. 실행 방법
 - Node.js를 사용하여 크롤러 스크립트 실행
