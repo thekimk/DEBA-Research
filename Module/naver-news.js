@@ -48,13 +48,13 @@ const DE_NO_DOT = END_DATE.replace(/\./g, '');
  */
 
 const SELECTORS = {
-  newsGroup: 'div.sds-comps-vertical-layout.sds-comps-full-layout.UC1lc0LnKWszTX7CYO7K', 
+  newsGroup: 'div.sds-comps-vertical-layout.sds-comps-full-layout._4zQ0QZWfn7bqZ_ul5OV', 
   relatedLink: 'a[href*="related=1"]',
-  subNewsOuter: 'div.sds-comps-base-layout.sds-comps-full-layout.JT4g6KsELnSY85CYAym9',
-  subNewsItem: 'div.sds-comps-base-layout.sds-comps-full-layout.Eb67Vg8smoO6HeVy39Y9',
+  subNewsOuter: 'div.sds-comps-base-layout.sds-comps-full-layout.oMdLwFWVhF9gSRzYurHu',
+  subNewsItem: 'div.sds-comps-base-layout.sds-comps-full-layout.Tx4WjybaBfT_28u50R8w',
   top: {
     profile: 'div[data-sds-comp="Profile"]',
-    content: 'div.sds-comps-base-layout.sds-comps-full-layout.HyuoyN_3xv7CrtOc6W9S',
+    content: 'div.sds-comps-base-layout.sds-comps-full-layout.lXIuYzrguLoz_B7ZfyhD',
     press: '.sds-comps-profile-info-title span', 
     date: ['span.sds-comps-profile-info-subtext > span.sds-comps-text-type-body2',
            'span.sds-comps-text.sds-comps-text-type-body2.sds-comps-text-weight-sm'].join(', '),
@@ -111,7 +111,7 @@ function addIfNew(url, item, targetArray, seenSet) {
  */
 (async () => {
   const crawlStart = Date.now();     
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
   // URL 구성 및 이동
   for (const KEYWORD of keywords) {
