@@ -1,3 +1,0 @@
-﻿Algorithm,Dataset,N,True Positive,True Negative,False Positive,False Negative,Precision,Recall,Specificity,F1-score,Accuracy,Balanced Accuracy,AUC
-MLP,Test set,1600,1415,0,185,0,0.884375,1.0,0.0,0.9386401326699834,0.884375,0.5,0.5931219558781397
-MLP,Entire population,12968,7136,0,5832,0,0.5502776064157927,1.0,0.0,0.709908475925189,0.5502776064157927,0.5,0.5046041833905405
